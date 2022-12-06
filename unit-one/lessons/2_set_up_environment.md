@@ -1,75 +1,85 @@
-# Setup Development Environment
+# 配置开发环境
 
-## Install Sui Binaries Locally
+## 本地安装 Sui Binaries 
 
-[Reference Page](https://docs.sui.io/build/install#install-sui-binaries)
+[参考页面](https://docs.sui.io/build/install#install-sui-binaries)
 
-1. [Install prerequisites](https://docs.sui.io/build/install#prerequisites) (dependent on OS) 
+1. [安装依赖](https://docs.sui.io/build/install#prerequisites) (取决于操作系统)   
+   [Rust备选安装方法](https://www.cnblogs.com/hustcpp/p/12341098.html)  
+   [Homebrew备选安装方法](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)  
+   [推荐Rust入门课](https://www.bilibili.com/video/BV1hp4y1k7SV)  
 
-2. Install Sui binaries
+2. 安装 Sui binaries
     
     `cargo install --locked --git https://github.com/MystenLabs/sui.git --branch devnet sui`
 
-3. Check binaries are installed successfully:
+3. 检验 binaries 是否安装成功:
 
     `sui --version`
 
-    You should see the version number in the terminal if sui binaries were installed successfully. 
+    如果 sui binaries 安装成功，你将在终端看到版本信息。
+    
+## 使用预先安装有 Sui Binaries 的 Docker 镜像
 
-## Using a Docker Image with Pre-installed Sui Binaries
+1. [安装 Docker](https://docs.docker.com/get-docker/)
 
-1. [Install Docker](https://docs.docker.com/get-docker/)
-
-2. Pull the premade Docker image for the Sui Move intro course 
+2. Pull 为 Sui Move 导论课预制的 Docker 镜像
 
     `docker pull hyd628/sui-move-intro-course:latest`
 
-3. Start and shell into the Docker container:
+3. 启动并进入 Docker 容器的 shell:
 
     `docker run --entrypoint /bin/sh -itd hyd628/sui-move-intro-course:latest`
     `docker exec -it <container ID> bash`
 
-## Configure VS Code with Move Analyzer Plug-in
+## 为 VS Code 配置 Move Analyzer 插件
 
-1. Install [Move Analyzer plugin](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer) from VS Marketplace
+1. 从 VS Marketplace 安装 [Move Analyzer 插件](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer)
 
-2. Add compatibility for Sui style wallet addresses:
+2. 配置与 Sui 格式的钱包地址兼容:
 
     `cargo install --git https://github.com/move-language/move move-analyzer --features "address20"`
 
-## Sui CLI Basic Usage
+## Sui CLI 基础用法
 
-[Reference Page](https://docs.sui.io/build/cli-client)
+[参考页面](https://docs.sui.io/build/cli-client)
 
-### Managing Networks
+### 管理网络
 
-- Switching network: `sui client switch --env [network alias]`
-- Default network aliases: 
-    - localnet: http://0.0.0.0:9000
-    - devnet: https://fullnode.devnet.sui.io:443
-- List all current network aliases: `sui client envs`
-- Add new network alias: `sui client new-env --alias <ALIAS> --rpc <RPC>`
+- 切换网络: `sui client switch --env [network alias]`
+- 默认网络别名: 
+    - 本地网 localnet: http://0.0.0.0:9000
+    - 开发网 devnet: https://fullnode.devnet.sui.io:443
+- 列出当前所有网络别名: `sui client envs`
+- 添加新的网络别名: `sui client new-env --alias <ALIAS> --rpc <RPC>`
 
-### Check Active Address and Gas Objects
+### 查询启用地址和 Gas Objects
 
-- Check current addresses in key store: `sui client addresses`
-- Check active-address: `sui client active-address`
-- List all controlled gas objects: `sui client gas`
+- 查询当前保存了密钥的地址: `sui client addresses`
+- 查询当前启用的地址: `sui client active-address`
+- 列出所拥有的 gas objects: `sui client gas`
 
-### Mint a Demo NFT
+### Mint 一个 Demo NFT
 
-- Mint a demo NFT on the current network: `sui client create-example-nft`. You should see something similar to the following output:
+- 在当前网络中 mint 一个 demo NFT: `sui client create-example-nft`. 你将看到与下图相近的输出信息:
 
 ![Demo NFT](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/demo-nft.png)
 
-## Get Devnet Sui Tokens
+## 获得开发网 Devnet 的 Sui Tokens
 
-1. [Join Sui Discord](https://discord.gg/sui)
-2. Complete verification steps
-3. Enter #devnet-faucet channel
-4. Type `!faucet <WALLET ADDRESS>`
+1. [加入 Sui Discord](https://discord.gg/sui)
+2. 完成身份验证步骤
+3. 进入 #devnet-faucet 频道
+4. 输入 `!faucet <WALLET ADDRESS>`
+  
+如果使用Discord不方便或faucet故障，可以直接在终端输入指令  
+```
+curl --location --request POST 'https://faucet.devnet.sui.io/gas' \
+--header 'Content-Type: application/json' \
+--data-raw '{"FixedAmountRequest":{"recipient":"<WALLET ADDRESS>"}}'
+```
 
-## Get Testnet Sui Tokens
+## 获得测试网 Testnet 的 Sui Tokens
 
 
 

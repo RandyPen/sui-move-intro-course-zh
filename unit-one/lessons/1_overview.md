@@ -1,7 +1,7 @@
-# Environment Setup and Hello World
+# 环境配置与 Hello World
 
-## Introduction
+## 导论
 
-Welcome to the Sui Move introduction course. In this first unit, we will walk you through the process of setting up the development environment for working with Sui Move, and create a basic Hello World project as a gentle introduction into the world of Sui.
+欢迎来到Sui Move的导论课。在第一单元，我们会带你过一遍配置开发环境的流程，创建运行一个Hello World的项目来体验Sui开发。
 
-Let's get started!
+让我们开始吧！
