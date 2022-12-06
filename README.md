@@ -22,7 +22,7 @@ Sui Move 编程的导论课
 - [x] English
 - [x] 中文
 
-如果你想帮助将该文档翻译到其他语言，请[联系](mailto:henry@mystenlabs.com)  
+如果你愿意帮助将该文档翻译到其他语言，请[联系](mailto:henry@mystenlabs.com)  
 
 ## 在线课程
 
