@@ -1,8 +1,8 @@
-# Sui Move Intro Course
+# Sui Move 导论课
 
-Introductory course to the Sui Move language
+Sui Move 编程的导论课
 
-## General Developer Resources
+## 通用开发者资源
 
 - [Sui Developer Documentation](https://docs.sui.io/build)
 - [Sui GitHub](https://github.com/MystenLabs/sui)
@@ -10,20 +10,21 @@ Introductory course to the Sui Move language
 - [Sui Typescript SDK](https://github.com/MystenLabs/sui/tree/main/sdk/typescript)
 - [Sui Rust SDK](https://github.com/MystenLabs/sui/tree/main/crates/sui-sdk)
 
-## Socials and Communities
+## 社交媒体与社区
 
-If you want to join Sui Dev Communities, Join via following links:
+如果你想要加入 Sui 开发者社区，通过下面链接加入:
 
-- Follow [Sui Twitter](https://twitter.com/SuiNetwork) for updates and Sui related news
-- [Sui Official Discord](https://discord.gg/sui)
+- 关注 [Sui Twitter](https://twitter.com/SuiNetwork) 获得 Sui 相关的更新和新闻
+- [Sui 官方 Discord](https://discord.gg/sui)
 
-## Repo Languages
+## 仓库语言
 
 - [x] English
+- [x] 中文
 
-Please [get in touch](mailto:henry@mystenlabs.com) if you want to help translate this into other languages. 
+如果你想帮助将该文档翻译到其他语言，请[联系](mailto:henry@mystenlabs.com)  
 
-## Online Lectures
+## 在线课程
 
 - [ ] Lecture Recordings of all materials
 
