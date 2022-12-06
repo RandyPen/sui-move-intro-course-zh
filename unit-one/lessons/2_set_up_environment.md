@@ -5,6 +5,9 @@
 [参考页面](https://docs.sui.io/build/install#install-sui-binaries)
 
 1. [安装依赖](https://docs.sui.io/build/install#prerequisites) (取决于操作系统)   
+   [Rust备选安装方法](https://www.cnblogs.com/hustcpp/p/12341098.html)  
+   [Homebrew备选安装方法](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)  
+   [推荐Rust入门课](https://www.bilibili.com/video/BV1hp4y1k7SV)  
 
 2. 安装 Sui binaries
     
@@ -68,6 +71,13 @@
 2. 完成身份验证步骤
 3. 进入 #devnet-faucet 频道
 4. 输入 `!faucet <WALLET ADDRESS>`
+  
+如果使用Discord不方便或faucet故障，可以直接在终端输入指令  
+```
+curl --location --request POST 'https://faucet.devnet.sui.io/gas' \
+--header 'Content-Type: application/json' \
+--data-raw '{"FixedAmountRequest":{"recipient":"<WALLET ADDRESS>"}}'
+```
 
 ## 获得测试网 Testnet 的 Sui Tokens
 
