@@ -1,66 +1,65 @@
-# Contract Deployment and Hello World Demo
+# 部署智能合约与 Hello World Demo 项目
 
-## The Complete Hello World Sample Project
+## 完整的 Hello World 示例项目
 
-You can find the complete Hello World project in [this directory](https://github.com/sui-foundation/sui-move-intro-course/tree/main/unit-one/example_projects/hello_world). 
+完整的 Hello World 项目可以在[这里](https://github.com/sui-foundation/sui-move-intro-course/tree/main/unit-one/example_projects/hello_world)被找到。
 
-## Deploying the Contract
+## 部署智能合约
 
-We will use the Sui CLI to deploy the package to the Sui network. You can deploy it to either the Sui devnet, testnet or 
-the local node. Just set the Sui CLI to the respective network and have enough tokens to pay for gas. 
+我们使用 Sui CLI 将 package 部署到 Sui 网络。你可以选择部署到 Sui 的 devnet 开发网，testnet 测试网或者本地节点。只要将 Sui CLI 设置到对应网络，并且拥有足够支付 gas 的 tokens 即可。
 
-The Sui CLI command for deploying the package is the following:
+部署 package 的 Sui CLI 指令如下:
 
 ```
 sui client publish --path <absolute local path to the Sui Move package> --gas-budget 30000
 ```
 
-The output should look something like this if the contract was successfully deployd:
+如果合约部署成功，输出信息会跟下面相似:
 
-![Publish Output](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/publish.png)
+![发布输出](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/publish.png)
 
-The object ID under the `Created Objects` section is the object ID of the Hello World package we just published.
+在 `Created Objects` 下面的是刚才发布的 Hello World package 智能合约的 object ID. 
 
-Let's export that to a variable. 
+让我们使用 export 指令将该 object ID 的值传递给一个变量。
 
 ```
-export PACKAGE_ID=<package object ID from previous output>
+export PACKAGE_ID=<在先前输出信息中的 package object ID>
 ```
 
-## Calling a Method through a Transaction
+## 在交易中调用函数
 
-Next we want to mint a Hello World object by calling the `mint` function in the smart contract we just deployed.
+接下来，我们通过调用刚才部署的智能合约中的 `mint` 函数来 mint 一个 Hello World object.
 
-Note that we are able to do this because `mint` is an entry function. 
+我们能够做这种操作是因为 `mint` 是一个 entry 函数。
 
-The command for this using Sui CLI is:
+完成该操作的 Sui CLI 指令是:
 
 ```
 sui client call --function mint --module hello_world --package $PACKAGE_ID --gas-budget 3000
 ```
 
-The console output should look like this if the `mint` function was successfully called, and a Hello World object was created and transferred:
+如果 `mint` 函数被成功调用，一个 Hello World object 会被创建和转移，console 中输出的信息会与下面相似:
 
-![Mint Output](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/mint.png)
+![Mint 输出](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/mint.png)
 
-The object ID under the `Created Objects` section of the output is the ID of the Hello World object.
+在 `Created Objects` 下面的是  Hello World object 的 object ID. 
 
-## Viewing the Object with Sui Explorer
+## 使用 Sui Explorer 察看 Object
 
-Let's use the [Sui Explorer](https://explorer.sui.io/) to view the Hello World object we just created and transferred.
+可以使用 [Sui Explorer](https://explorer.sui.io/) 来察看我们刚才创建和转移的 Hello World object. 
 
-Choose the network you are using through the dropdown menu on the upper right. 
+从右上角的下拉菜单中选择正在使用的网络。
 
-If you are using a local dev node, select the `Custom RPC URL` option and enter:
+如果你使用的是本地开发节点，选择 `Custom RPC URL` 然后输入:
 
 ```
 http://127.0.0.1:9000
 ```
 
-Search for the object ID from the output of the previous transaction and you should be able to find the object on the explorer:
+根据先前交易输出信息中的 object ID 进行搜索，你会在 explorer 中看到 object 的详情:
 
-![Explorer Output](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/explorer.png)
+![Explorer 输出](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-one/images/explorer.png)
 
-You should see the text "Hello World!" under the object's properties. 
+你应该能看到这个 object 的属性中包含 "Hello World!" 字符串。
 
-Great job, this concludes the first unit of the course.
+做得很棒！本课程的第一单元到这里完结。
