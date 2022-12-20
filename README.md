@@ -19,10 +19,10 @@ Sui Move 编程的导论课
 
 ## 仓库语言
 
-- [x] English
+- [x] [English](https://github.com/sui-foundation/sui-move-intro-course)
 - [x] 中文
 
-如果你愿意帮助将该文档翻译到其他语言，请[联系](mailto:henry@mystenlabs.com)  
+如果你愿意帮助将该文档翻译到其他语言，请[联系我们](mailto:henry@mystenlabs.com)  
 
 ## 在线课程
 
