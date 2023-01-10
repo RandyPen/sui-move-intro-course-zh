@@ -38,7 +38,8 @@ public entry fun delete_transcript(transcriptObject: TranscriptObject){
 1. 在解包 struct 获取它的 ID 之后，可以通过调用 framework 里头的 `object::delete` 方法处理它的 object ID 来实现删除。
 
 *💡注意: 在上面示例中使用了下划线 `_` 来标注未使用的变量或参数，可以在传入后立即消耗掉它们。*  
-**这里能找到我们写到这里时处于开发进展中版本的代码: [WIP transcript.move](../example_projects/transcript/sources/transcript_1.move_wip)**
+
+**这里能找到对应这里的处于开发进展中版本的代码: [WIP transcript.move](../example_projects/transcript/sources/transcript_1.move_wip)**
 
 
 
