@@ -31,11 +31,11 @@ public entry fun delete_transcript(transcriptObject: TranscriptObject){
 1. 要删除一个 object, 你首先要解包这个 object 并且获取它的 object ID. 解包的操作只能够在定义了这个 object 的 module 内进行。这是为了遵守 Move 的专用结构操作规则:
    
 - struct 类型只能在定义了该 struct 的 module 内创建("打包") 或 销毁("解包")
-- struct 的属性也智能在定义了该 struct 的 module 内获取
+- struct 的属性也只能在定义了该 struct 的 module 内获取
 
 根据这些规则，如果你想要在定义了该 struct 的 module 之外调整你的 struct, 就需要为这些操作提供 public methods.
 
-1. 在解包 struct 获取它的 ID 之后，可以通过调用 framework 里头的 `object::delete` 方法处理它的 object ID 来实现删除。
+2. 在解包 struct 获取它的 ID 之后，可以通过调用 framework 里头的 `object::delete` 方法处理它的 object ID 来实现删除。
 
 *💡注意: 在上面示例中使用了下划线 `_` 来标注未使用的变量或参数，可以在传入后立即消耗掉它们。*  
 
