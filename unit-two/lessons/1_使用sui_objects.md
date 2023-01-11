@@ -2,7 +2,7 @@
 
 ## 介绍
 
-Sui Move 是一门完全以 object 为中心的编程语言。在Sui上的交易可以表示为输入与输出都是objects的操作。 我们之前就已经在[第一单元的第四课中](../../unit-one/lessons/4_定制类型与能力.md#定制类型与能力)简单接触过这个概念，Sui objects 是 Sui 存储中的基本单元，所有都会使用 `struct` 关键词开头。  
+Sui Move 是一门完全以 object 为中心的编程语言。在Sui上交易的输入与输出都可以是对 objects 的操作。 我们之前就已经在[第一单元的第四课中](../../unit-one/lessons/4_定制类型与能力.md#定制类型与能力)简单接触过这个概念，Sui objects 是 Sui 存储中的基本单元，所有都会使用 `struct` 关键词开头。  
 
 看一个记录学生成绩报告单的例子:
 
