@@ -2,7 +2,8 @@
 
 ## 参数传递 (使用 `value`, `ref` 和 `mut ref`)
 
-如果你已经熟悉 Rust 语言，你应该也会熟悉 Rust 的所有权概念。与 Solidity 对比起来，move 语言的一个优点在于，你根据函数的接口就可以判断出这个函数调用会对你的资产做什么操作。看几个例子:
+如果你已经熟悉 Rust 语言，你应该也会熟悉 Rust 的所有权概念。有几个拓展视频: [所有权规则、内存与分配](https://www.bilibili.com/video/BV1hp4y1k7SV?p=16), [所有权与函数](https://www.bilibili.com/video/BV1hp4y1k7SV?p=17), [引用与借用](https://www.bilibili.com/video/BV1hp4y1k7SV?p=18)。  
+与 Solidity 对比起来，move 语言的一个优点在于，你根据函数的接口就可以判断出这个函数调用会对你的资产做什么操作。看几个例子:
 
 ```rust
 use sui::object::{Self};
