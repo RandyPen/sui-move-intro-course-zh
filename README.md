@@ -26,6 +26,17 @@ Sui Move 编程的导论课
 
 ## 在线课程
 
-- [ ] Lecture Recordings of all materials
+- [ ] Encode Club Video Series (English)
+- [ ] BuidlerDAO 系列课程视频 (中文)
 
 # FAQ
+
+1. 我可以使用此 repo 的内容制作与 Sui 或 Sui Move 编程语言相关的其他教育内容吗？
+
+是的。这是此 repo 的初衷，允许内容创建者和教育平台使用和扩展此 repo 中的材料，以创建有关 Sui 或 Sui Move 语言的不同形式的媒体或技术内容。
+
+这个 repo 是根据 Creative Common License 获得许可的； [CC-BY-SA-4.0 许可证](https://github.com/RandyPen/sui-move-intro-course-zh/blob/main/LICENSE)，具体而言。这允许任何人出于任何目的重新混合、转换、构建或共享此 repo 中的内容，但基于此 repo 的任何内容也需要根据相同的知识共享许可获得许可，并注明来源。
+
+2. 我可以怎样为这个 repo 做出贡献？
+
+我们非常欢迎社区贡献，对上游 repo 进行 fork 并提出 PR 即可。
