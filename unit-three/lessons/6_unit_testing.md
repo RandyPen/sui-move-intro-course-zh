@@ -1,12 +1,12 @@
-# Unit Testing
+# 单元测试
 
-Sui supports the [Move Testing Framework](https://github.com/move-language/move/blob/main/language/documentation/book/src/unit-testing.md). Here we will create some unit tests for `Managed Coin` to show how to write unit tests and run them.
+Sui 支持 [Move Testing Framework](https://github.com/move-language/move/blob/main/language/documentation/book/src/unit-testing.md)。这里我们将为 `Managed Coin` 创建一些单元测试，来展示怎样写和运行单元测试。
 
-## Testing Environment
+## 测试环境
 
-Sui Move test codes are just like any other Sui Move codes, but they have special annotations and functions to distinguish them from actual production envrionment and the testing environment.
+Sui Move 测试代码与其他任何 Sui Move 代码没有什么不同，但是它有一些特别的注释和功能来区分真实产品环境和测试环境。
 
-Your first start with `#[test]` or `#[test_only]` annotation on top of testing function or module to mark them as testing environment. 
+首先，你可以在测试功能或模块最顶部使用 `#[test]` 或 `#[test_only]` 注释来标记测试环境。
 
 ```rust
 #[test_only]
@@ -17,13 +17,13 @@ module fungible_tokens::managed_tests {
 }
 ```
 
-We will put the unit tests for `Managed Coin` into a separate testing module called `managed_tests`. 
+我们会将 `Managed Coin` 的单元测试放入到单独的测试模块，叫做 `managed_tests`。
 
-Each function inside this module can be seen as one unit test consisiting of a single or multiple transactions. We are only going to write one unit test called `mint_burn` here. 
+模块中的每一个功能可以看作是一个单元测试，每个单元测试是由一个或多个交易组成。我们这里只写一个叫做 `mint_burn` 的单元测试。
 
 ## Test Scenario
 
-Inside the testing environment, we will be mainly leveraging the [`test_scenario` package](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/test_scenario.move) to simulate a runtime envrionment. The main object we need to understand and interact with here is the `Scenario` object. A `Scenario` simulates a multi-transaction sequence, and it can be initialized with the sender address as following:
+在测试环境中，我们将主要利用 [test_scenario](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/test/test_scenario.move) 包来模拟一个运行环境。这里我们需要理解和交互的主要对象是 Scenario object。一个 Scenario 模拟一个多重交易事件，并且可以用发送人地址将其初始化，如下所示：
 
 ```rust
   // Initialize a mock sender address
@@ -35,11 +35,11 @@ Inside the testing environment, we will be mainly leveraging the [`test_scenario
   test_scenario::end(scenario);  
 ```
 
-*💡Note that the `Scenario` object is not droppable, so it must be explicitly cleaned up at the end of its scope using `test_scenario::end`.*
+*💡注意* *Scenario* *object 不可删除，所以必须在末尾使用* *test_scenario::end* *明确对其进行清理。*
 
 ### Initializing the Module State
 
-To test our `Managed Coin` module, we need to first initialize the module state. Given that our module has an `init` function, we need to first create a `test_only` init function inside the `managed` module:
+为了测试我们的 Managed Coin模块，我们需要初始化模块状态。考虑到模块具有`init`功能，我们首先需要在 managed模块中创造一个 test_only init 功能：
 
 ```rust
 #[test_only]
@@ -49,7 +49,7 @@ To test our `Managed Coin` module, we need to first initialize the module state.
     }
 ```
 
-This is essentially a mock `init` function that can only be used for testing. Then we can initialize the runtime state in our scenario by simply calling this function:
+这本质上就是一个模拟的`init`功能，只用于测试。接下来我们可以在测试场景中调用这个功能初始化运行状态：
 
 ```rust
     // Run the managed coin module init function
@@ -60,39 +60,38 @@ This is essentially a mock `init` function that can only be used for testing. Th
 
 ### Minting 
 
-We use the [`next_tx` method](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/test_scenario.move#L103) to advance to the next transaction in our scenario where we want to mint a `Coin<MANAGED>` object.
+在铸造 `Coin<MANAGED>` 对象场景中，我们使用 [next_tx](<https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/test/test_scenario.move>) 方法前进到下一个交易。
 
-To do this, we need to first extract the `TreasuryCap<MANAGED>` object. We use a special testing function called `take_from_sender` to retrieve this from our scenario. Note that we need to pass into `take_from_sender` the type parameter of the object we are trying to retrieve. 
+为了完成铸造，我们首先需要提取 `TreasuryCap<MANAGED>` 对象。我们使用一个叫做 `take_from_sender` 的特别测试功能在我们的场景中检索 `TreasuryCap<MANAGED>` 对象。注意我们需要将我们尝试检索对象的类型参数传递给 `take_from_sender` 。
 
-Then we simply call the `managed::mint` using all the necessary parameters. 
+然后我们直接调用 `managed::mint` ，用上所有所需的参数。
 
-At the end of this transaction, we must return the `TreasuryCap<MANAGED>` object to the sender address using `test_scenario::return_to_address`.
+在交易的最后，我们必须使用 `test_scenario::return_to_address` 将 `TreasuryCap<MANAGED>` 对象返回到发送人地址。
 
 ```rust
 next_tx(&mut scenario, addr1);
-        {
-            let treasurycap = test_scenario::take_from_sender<TreasuryCap<MANAGED>>(&scenario);
-            managed::mint(&mut treasurycap, 100, addr1, test_scenario::ctx(&mut scenario));
-            test_scenario::return_to_address<TreasuryCap<MANAGED>>(addr1, treasurycap);
-        };
+{
+  let treasurycap = test_scenario::take_from_sender<TreasuryCap<MANAGED>>(&scenario);
+  managed::mint(&mut treasurycap, 100, addr1, test_scenario::ctx(&mut scenario));
+  test_scenario::return_to_address<TreasuryCap<MANAGED>>(addr1, treasurycap);
+};
 ```
 
 ### Burning 
 
-To testing burning a token, it's almost exactly the same as testing minting, except we also need to retrieve a `Coin<MANAGED>` object from the person it was minted to. 
+测试燃烧代币基本跟测试铸造代币完全一样，除了我们也需要在代币持有者那检索 `Coin<MANAGED>`对象。
 
 ## Running Unit Tests
 
-The full [`managed_tests`](../example_projects/fungible_tokens/sources/managed_tests.move) module source code can be found under `example_projects` folder.
+完整的 [managed_tests](<https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-three/example_projects/fungible_tokens/sources/managed_tests.move>) 模块源代码位于 `example_projects` 文件夹中。
 
-To run the unit tests, we simply need to type in the following command in CLI in the project directory:
+要运行单元测试，我们只需要在项目目录的 CLI 中输入如下命令：
 
 ```bash
-  sui move test
+sui move test
 ```
 
-You should see console output indicating which unit tests have passed or failed.
+你就可以看到控制台的输出结果显示哪个单元测试通过了，哪个没通过。
 
 ![Unit Test](../images/unittest.png)
-
 
