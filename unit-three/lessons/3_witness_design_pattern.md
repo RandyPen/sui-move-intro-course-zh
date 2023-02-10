@@ -1,14 +1,16 @@
 # The Witness Design Pattern
 
-Next, we need to understand the witness pattern to peek under the hood of how a fungible token is implemented in Sui Move. 
+接下来，我们需要了解witness设计模式，来明确同质化代币在Sui Move中是如何实现的。
 
-Witness is a design pattern used to prove that the a resource or type in question, `A`, can be initiated only once after the ephemeral `witness` resource has been consumed. The `witness` resource must be immediately consumed or dropped after use, ensuring that it cannot be reused to create multiple instances of `A`.
+witness是一种设计模式，用于证明有关的一个资源或类型`A`，在短暂的`witness`资源被消耗后只能启动一次。
+
+`witness`资源在使用后必须立即被消耗或丢弃，确保它不能被重复使用以创建`A`的多个实例。
 
 ## Witness Pattern Example
 
-In the below example, the `witness` resource is `PEACE`, while the type `A` that we want to control instantiation of is `Guardian`. 
+在下面的例子中，`witness`资源是`PEACE`，而我们要控制实例化的`A`类型是`Guardian`。
 
-The `witness` resource type must have the `drop` keyword, so that this resource can be dropped after being passed into a function. We see that the instance of `PEACE` resource is passed into the `create_guardian` method and dropped (note the underscore before `witness`), ensuring that only one instance of `Guardian` can be created.
+`witness`资源类型必须有`drop`关键字，这样这个资源在被传入一个函数后可以被丢弃。我们看到`PEACE`资源的实例被传递到`create_guardian`方法中并被丢弃（注意`witness`前的下划线），确保只能创建一个`Guardian`的实例。
 
 ```rust
     /// Module that defines a generic type `Guardian<T>` which can only be
@@ -47,27 +49,27 @@ The `witness` resource type must have the `drop` keyword, so that this resource 
     }
 ```
 
-*The example above is modified from the excellent book [Sui Move by Example](https://examples.sui.io/patterns/witness.html) by [Damir Shamanaev](https://github.com/damirka).*
+*上面的例子是从*[Damir Shamanaev](https://github.com/damirka)*的优秀书籍*[Sui Move by Example](https://examples.sui.io/patterns/witness.html)*中修改的。*
 
-### The `phantom` Keyword
+## phantom关键字
 
-In the above example, we want the `Guardian` type to have the `key` and `store` abilities, so that it's an asset and is transferrable and persists in global storage. 
+在上面的例子中，我们希望 `Guardian` 类型具有 `key` 和 `store` 的能力，这样它就是一个资产，可以转移并在全局存储中持续存在。
 
-We also want to pass in the `witness` resource, `PEACE`, into `Guardian`, but `PEACE` only has the `drop` ability. Recall our previous discussion on [ability constraints](./2_intro_to_generics.md#ability-constraints) and inner types, the rule implies that `PEACE` should also have `key` and `storage` given that the outer type `Guardian` does. But in this case, we do not want to add unnecessary abilities to our `witness` type, because doing so could cause undesirable behaviors and vulnerabilities. 
+我们还想把 `witness` 资源 `PEACE` 传入 `Guardian`，但 `PEACE` 只有 `drop` 的能力。回顾我们之前关于[能力约束](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-three/lessons/2_intro_to_generics.md#ability-constraints)和内部类型的讨论，该规则暗示`PEACE`也应该有`key`和`storage`，因为外部类型`Guardian`有。但是在这种情况下，我们不想给我们的`witness`类型添加不必要的能力，因为这样做可能会导致不符合预期的行为和漏洞。
 
-We can use the keyword `phantom` to get around this situation. When a type parameter is either not used inside the struct definition or it is only used as an argument to another `phantom` type parameter, we can use the `phantom` keyword to ask the Move type system to relax the ability constraint rules on inner types. We see that `Guardian` doesn't use the type `T` in any of its fields, so we can safely declare `T` to be a `phantom` type. 
+我们可以使用关键字`phantom`来解决这种情况。当一个类型参数没有在结构定义中使用，或者它只是作为另一个`phantom`类型参数的参数使用时，我们可以使用`phantom`关键字来要求Move类型系统放松对内部类型的能力约束规则。我们看到`Guardian`在它的任何字段中都没有使用`T`类型，所以我们可以安全地声明`T`是一个`phantom`类型。
 
-For a more in-depth explanation of the `phantom` keyword, please check the [relevant section](https://github.com/move-language/move/blob/main/language/documentation/book/src/generics.md#phantom-type-parameters) of the Move language documentation.
+关于`phantom`关键字的更深入解释，请查看Move语言文档的[相关章节](https://github.com/move-language/move/blob/main/language/documentation/book/src/generics.md#phantom-type-parameters)。
 
 ## One Time Witness
 
-One Time Witness (OTW) is a sub-pattern of the Witness pattern, where we utilize the module `init` function to ensure that there is only one instance of the `witness` resource created (so type `A` is guaranteed to be a singleton). 
+一次性见证One Time Witness（OTW）是Witness模式的一个子模式，我们利用模块`init`函数来确保只创建一个`witness`资源的实例（所以`A`类型被保证是唯一的）。
 
-In Sui Move a type is considered an OTW if its definition has the following properties:
+在Sui Move中，如果一个类型的定义具有以下属性，那么它就被认为是一个OTW。
 
-- The type is named after the module but uppercased
-- The type only has the `drop` ability
+-   该类型是以模块的名字命名的，但大写字母。
+-   该类型只具有`drop`的能力
 
-To get an instance of this type, you need to add it as the first argument to the module `init` function as in the above example. The Sui runtime will then generate the OTW struct automatically at module publish time. 
+为了得到这个类型的实例，你需要把它作为第一个参数添加到模块的`init`函数中，如上例。然后Sui运行时将在模块发布时自动生成OTW结构。
 
-The above example uses the One Time Witness design pattern to guarantee that `Guardian` is a singtleton.
+上面的例子使用一次性见证设计模式来保证`Guardian`是一个单例。
