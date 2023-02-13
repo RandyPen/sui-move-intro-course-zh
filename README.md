@@ -27,7 +27,7 @@ Sui Move 编程的导论课
 ## 在线课程
 
 - [ ] Encode Club Video Series (English)
-- [ ] BuidlerDAO 系列课程视频 (中文)
+- [ ] [BuidlerDAO SUI MOVE中文系列课程](https://www.bilibili.com/video/BV1RY411v7YU) (中文)
 
 # FAQ
 
