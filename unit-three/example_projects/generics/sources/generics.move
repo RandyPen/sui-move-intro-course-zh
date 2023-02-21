@@ -36,4 +36,15 @@ module generics::generics {
         transfer::transfer(PhantomBox<T> {id: object::new(ctx)}, tx_context::sender(ctx))
     }
 
+
+    struct No_Store has drop {}
+
+    fun init(ctx: &mut TxContext) {
+        create_box<bool>(true, ctx);
+        create_box<u128>(1u128, ctx);
+
+        // Fail
+        // create_box<No_Store>(No_Store {}, ctx);
+        // create_phantom_box<No_Store>(Only_drop{}, ctx);
+    }
 }

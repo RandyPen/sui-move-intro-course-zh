@@ -5,8 +5,9 @@
 module fungible_tokens::managed_tests {
 
     use fungible_tokens::managed::{Self, MANAGED};
-    use sui::coin::{Coin, TreasuryCap};
+    use sui::coin::{Self, Coin, TreasuryCap};
     use sui::test_scenario::{Self, next_tx, ctx};
+    use std::debug;
 
     #[test]
     fun mint_burn() {
@@ -33,6 +34,8 @@ module fungible_tokens::managed_tests {
         next_tx(&mut scenario, addr1);
         {
             let coin = test_scenario::take_from_sender<Coin<MANAGED>>(&scenario);
+            debug::print(&coin);
+            assert!(coin::value(&coin) == 100, 0);
             let treasurycap = test_scenario::take_from_sender<TreasuryCap<MANAGED>>(&scenario);
             managed::burn(&mut treasurycap, coin);
             test_scenario::return_to_address<TreasuryCap<MANAGED>>(addr1, treasurycap);
