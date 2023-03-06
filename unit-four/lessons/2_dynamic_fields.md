@@ -1,17 +1,17 @@
 # Dynamic Fields
 
-To peek under how collections like `Table` are actually implemented in Sui Move, we need to introduce the concept of dynamic fields in Sui Move. Dynamic fields are heterogeneous fields that can be added or removed at runtime, and can have arbitrary user assigned names. 
+为了了解像 Table 这样的集合在 Sui Move 中是如何实现的，我们需要引入 Sui Move 中动态字段的概念。动态字段是可以在运行时添加或删除的异构字段，并且可以具有任意用户分配的名称。
 
-There are two sub-types of dynamic fields: 
+动态字段有两种子类型：
 
-  - **Dynamic Fields** can store any value that has the `store` ability, however an object stored in this kind of field will be considered wrapped and will not be accessible directly via its ID by external tools (explorers, wallets, etc) accessing storage.
-  - **Dynamic Object Fields** values *must* be Sui objects (have the `key` and `store` abilities, and `id: UID` as the first field), but will still be directly accessible via their object ID after being attached.
+-   **动态字段**：可以存储任何具有`store`能力的值，但是存储在这种字段中的对象将被视为被包装过（例如一个带有key能力的全局对象被嵌套进另一个结构体中），无法通过其直接访问通过外部工具（浏览器、钱包等）访问存储的 ID。
+-   **动态对象字段**：值必须是 Sui 对象（具有 `key` 和 `store` 能力，以及 `id: UID` 作为第一个字段），但仍然可以通过它们的对象 ID 直接访问被附上。
 
-## Dynamic Field Operations
+## 动态字段操作
 
-### Adding a Dynamic Field
+### 添加动态字段
 
-To illustrate how to work with dynamic fields, we define the following structs:
+为了说明如何使用动态字段，我们定义了以下结构：
 
 ```rust
    // Parent struct
@@ -31,7 +31,7 @@ To illustrate how to work with dynamic fields, we define the following structs:
     }
 ```
 
-Here's the API to use for adding **dynamic fields** or **dynamic object field** to an object:
+下面是用于向对象添加**动态字段**或**动态对象字段**的 API：
 
 ```rust
   module collection::dynamic_fields {
@@ -51,9 +51,9 @@ Here's the API to use for adding **dynamic fields** or **dynamic object field** 
   }
 ```
 
-### Accessing and Mutating a Dynamic Field
+### 访问和改变动态字段
 
-Dynamic fields and dynamic object fields can be read or accessed as the following:
+可以按如下方式读取或访问动态字段和动态对象字段：
 
 ```rust
     // Borrows a reference to a DOFChild
@@ -72,7 +72,7 @@ Dynamic fields and dynamic object fields can be read or accessed as the followin
     }
 ```
 
-Dynamic fields and dynamic object fields can also be mutated as the following:
+动态字段和动态对象字段也可以像下面这样改变：
 
 ```rust
     // Mutate a DOFChild directly
@@ -99,11 +99,11 @@ Dynamic fields and dynamic object fields can also be mutated as the following:
         ));
     }
 ```
-*Quiz: Why can `mutate_dofchild` be an entry function but not `mutate_dfchild`?* 
+*小测验：为什么`mutate_dofchild`可以作为入口函数而不是`mutate_dfchild`？*
 
-### Removing a Dynamic Field
+### 删除动态字段
 
-We can remove a dynamic field from its parent object as follows:
+我们可以从其父对象中删除一个动态字段，如下所示：
 
 ```rust
     // Removes a DFChild given its name and parent object's mutable reference, and returns it by value
@@ -130,16 +130,14 @@ We can remove a dynamic field from its parent object as follows:
     }
 ```
 
-Note that in the case of a dynamic object field, we can delete or transfer it after removing its attachment to another object, as a dynamic object field is a Sui object. But we cannot do the same with for a dynamic field, as it does not have the `key` ability and is not a Sui object. 
+请注意，对于动态对象字段，我们可以在删除它与另一个对象的附件后删除或转移它，因为动态对象字段是一个 Sui 对象。但是我们不能对动态字段做同样的事情，因为它没有`key`能力，也不是 Sui 对象。
 
-## Dynamic Field vs. Dynamic Object Field
+## 动态字段与动态对象字段
 
-When should you use a dynamic field versus a dynamic object field? Generally speaking, we want to use dynamic object fields when the child type in question has the `key` ability, and use dynamic fields otherwise. 
+什么时候应该使用动态字段与动态对象字段？一般来说，我们希望在相关子类型具有`key`能力时使用动态对象字段，否则使用动态字段。有关根本原因的完整解释，请查看@sblackshear 的[此论坛帖子](https://forums.sui.io/t/dynamicfield-vs-dynamicobjectfield-why-do-we-have-both/2095) .
 
-For a full explanation of the underlying reason, please check [this forum post](https://forums.sui.io/t/dynamicfield-vs-dynamicobjectfield-why-do-we-have-both/2095) by @sblackshear.  
+## 重温 `Table`
 
-## Revisiting `Table`
+现在我们了解了动态字段的工作原理，我们可以将 Table 集合视为动态字段操作的简单的封装。
 
-Now we understand how dynamic fields work, we can think of the `Table` collection as a thin wrapper around dynamic field operations. 
-
-You can look through the [source code](https://github.com/MystenLabs/sui/blob/eb866def280bb050838d803f8f72e67e05bf1616/crates/sui-framework/sources/table.move) of the `Table` type in Sui as an exercise, and see how each of the previously introduced operations map to dynamic field operations and with some additional logic to keep track of the size of the `Table`. 
+您可以查看 Sui 中 `Table` 类型的[源代码](https://github.com/MystenLabs/sui/blob/eb866def280bb050838d803f8f72e67e05bf1616/crates/sui-framework/sources/table.move) 作为练习，并查看之前介绍的每个操作如何映射到动态字段操作，以及如何使用一些额外的逻辑来跟踪`Table`的大小。

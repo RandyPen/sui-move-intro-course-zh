@@ -1,12 +1,32 @@
 # Homogeneous Collections 
 
-Before we delve into the main topic of building a marketplace on Sui, let's learn about collections in Move first. 
+在深入探讨在 Sui 上构建市场这一主题之前，让我们先了解一下 Move 中的集合。
 
 ## Vectors
 
-`Vector` in Move is similar to those in other languages such as C++. It's a way to dynamically allocate memory at runtime and manage a group of a single type, which can be a specific type or a [generic type](../../unit-three/lessons/2_intro_to_generics.md). 
+Move 中的`Vector`类似于其他语言（如 C++）中的 Vector。它是一种在运行时动态分配内存并管理一组单一类型的方法，可以是特定类型或[通用类型](../../unit-three/lessons/2_intro_to_generics.md)。
 
-See the included example code for defining a `vector` and its basic operations. 
+需要注意的是，用泛型类型定义的向量可以接受_任意类型_的对象，集合中的所有对象仍然必须是_相同类型_，也就是说，集合是_同质的_。
+
+### 创建vector
+
+任何类型的向量都可以通过 `vector` 字面量创建。
+
+```
+vector<T>[]: vector<T>
+vector<T>[e1, ..., en]: vector<T>
+```
+
+一个简单的示例：
+
+```
+(vector[]: vector<bool>);
+(vector[0u8, 1u8, 2u8]: vector<u8>);
+(vector<u128>[]: vector<u128>);
+(vector<address>[@0x42, @0x100]: vector<address>);
+```
+
+下面是一个自定义类型的vector，并封装了相关操作函数，请参阅包含的示例代码以`vector`的定义以及其基本操作。
 
 ```rust
 module collection::vector {
@@ -51,23 +71,22 @@ module collection::vector {
 
 ```
 
-It's important to note that while a vector defined with a generic type can accept objects of _an arbitrary type_, all objects in the collection still must be _the same type_, that is, the collection is _homogeneous_. 
+更多可以通过movebook查看
 
 ## Table
 
-A `Table` is a map-like collection that dynamically stores key-value pairs. But unlike a traditional map collection, it's keys and values are not stored within the `Table` value, but instead are stored using Sui's object system. The `Table` struct acts only as a handle into the object system to retrieve those keys and values. 
+`Table`是一个映射类的集合，可以动态存储键值对。但与传统的映射集合不同，它的键和值不存储在`Table`值中，而是使用 Sui 的对象系统存储。该`Table`结构仅充当对象系统的句柄以检索这些键和值。
 
-The `key` type of a `Table` must have the ability constraint of `copy + drop + store`, and the `value` type must have the ability constraint of `store`. 
+`Table`中一个`key`的类型必须具有`copy + drop + store`的能力约束，并且`value`类型必须具有`store`的能力约束。
 
-`Table` is also a type of _homogeneous_ collection where the key and value fields can be specified or generic types, but all values and all keys in a `Table` collection must be of the _same_ types. 
+`Table`也是一种*同构集合*类型，其中键和值字段可以指定或泛型类型，但集合中的所有值和所有键`Table`必须是相同的*类型*。
 
-*Quiz: Would two table objects containing the exact same key-value pairs be equal to each other when checked with the `===` operator? Try it out.*
+*测验：用运算符检查包含完全相同的键值对的两个表对象是否彼此相等`===`？试试看。*
 
-See the below example for working with `Table` collections:
+有关使用集合的信息，请参见以下示例`Table`：
 
 ```rust
 module collection::table {
-
     use sui::table::{Table, Self};
     use sui::tx_context::{TxContext};
 
