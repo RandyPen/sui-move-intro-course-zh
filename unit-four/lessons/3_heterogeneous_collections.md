@@ -1,16 +1,16 @@
 # Heterogeneous Collections
 
-Homogeneous collections like `Vector` and `Table` can work for marketplaces (or other types of applications) where we need to hold a collection of objects of the same type, but what if we need to hold objects of different types, or if we do not know at compile time what types the objects we need to hold are going to be?
+像`Vector`和`Table`这样的同类集合可以用于我们需要保存相同类型对象集合的市场，但是如果我们需要保存不同类型的对象，或者甚至如果我们在编译时不知道我们需要保存的对象是什么类型，那么又该怎么办呢？
 
-For this type of marketplaces, we need to use a _heterogenerous_ collection to hold the items to be sold. Already having done the heavy lifting of understanding dynamic fields, heterogenerous collection in Sui should be very easy to understand.We will look at the `Bag` collection type more closely here. 
+对于这种类型的市场，我们需要使用一个_heterogeneous_ collection 来保存要出售的商品。 已经完成了理解动态字段的繁重工作，Sui 中的异构集合应该很容易理解。我们将在这里更仔细地研究 `Bag` 集合类型。
 
-## The `Bag` Type
+## `Bag` 类型
 
-A `Bag` is a heterogeneous map-like collection. The collection is similar to `Table` in that its keys and values are not stored within the `Bag` value, but instead are stored using Sui's object system. The `Bag` struct acts only as a handle into the object system to retrieve those keys and values. 
+`Bag` 是一个异构的类似映射的集合。 该集合类似于`Table`，因为它的键和值同样不存储在`Bag`值中，而是使用 Sui 的对象系统存储。 `Bag` 结构仅充当对象系统的句柄以检索这些键和值。
 
-### Common `Bag` Operations
+### 常见的`Bag`操作
 
-A sample code of common `Bag` operations are included below: 
+常见的“Bag”操作示例代码如下：
 
 ```rust
 module collection::bag {
@@ -62,4 +62,4 @@ module collection::bag {
 }
 ```
 
-As you can see the functions signatures for interacting with a `Bag` collection are quite similar to ones interacting with a `Table` collection, with the main difference being not needing to declare any types while creating a new `Bag`, and the the key-value pair types being added to it do not need to be of the same types.
+如您所见，与`Bag`集合交互的函数签名与与`Table`集合交互的函数签名非常相似，主要区别在于在创建新的`Bag`时不需要声明任何类型，并 添加到其中的键值对类型不需要是相同的类型。

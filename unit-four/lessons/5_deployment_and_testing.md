@@ -1,8 +1,8 @@
-# Deployment and Testing
+# 部署和测试
 
-Next we can deploy and test our marketplace contract through the SUI CLI. 
+接下来我们可以通过 SUI CLI 部署和测试我们的市场合约。
 
-We create a simple `marketplace::widget` module so we can mint some items for us to list to help with test.
+我们创建了一个简单的 `marketplace::widget` 模块，这样我们就可以创建一些项目供我们列出以帮助测试。
 
 ```rust
 module marketplace::widget {
@@ -24,98 +24,98 @@ module marketplace::widget {
 }
 ```
 
-This is basically the Hello World project from Unit One, but made even simpler. 
+这基本上是第一单元的 Hello World 项目，但变得更加简单。
 
-## Deployment
+## 部署
 
-First we publish both the package with:
+首先我们发布两个包：
 
 ```bash
     sui client publish --gas-budget 3000
 ```
 
-You should see both `marketplace` and `widget` modules published on the explorer: 
+您应该会看到在资源管理器上发布的`marketplace`和`widget`模块：
 
 ![Publish](../images/publish.png)
 
-Export the package object ID into an environmental variable:
+将包对象 ID 导出到环境变量中：
 
 ```bash
-    export PACKAGE_ID=<package object ID from previous output>
+export PACKAGE_ID=<package object ID from previous output>
 ```
 
-## Initialize the Marketplace
+## 初始化市场
 
-Next, we need to initialize the marketplace contract by calling the `create` entry function. We want to pass it a type argument to specify which type of fungible token this marketplace will accept. It's easiest to just use the `Sui` native token here. We can use the following CLI command: 
+接下来，我们需要通过调用`create`入口函数来初始化市场合约。 我们想向它传递一个类型参数，以指定该市场将接受哪种类型的可替代代币。 在这里使用 `Sui` 原生标记是最简单的。 我们可以使用以下 CLI 命令：
 
 ```bash
-    sui client call --function create --module marketplace --package $PACKAGE_ID --type-args 0x2::sui::SUI --gas-budget 1000
+sui client call --function create --module marketplace --package $PACKAGE_ID --type-args 0x2::sui::SUI --gas-budget 1000
 ```
 
-Note the syntax for passing in the type argument for `SUI` token. 
+请注意为`SUI`令牌传递类型参数的语法。
 
-Export the `Marketplace` shared object's ID into an environmental variable:
+将 Marketplace 共享对象的 ID 导出到环境变量中：
 
 ```bash
-    export MARKET_ID=<marketplace shared object ID from previous output>
+export MARKET_ID=<marketplace shared object ID from previous output>
 ```
 
 ## Listing
 
-First, we mint a `widget` item to be listed:
+首先，我们制作一个要列出的`widget`项目：
 
 ```bash
-    sui client call --function mint --module widget --package  $PACKAGE_ID --gas-budget 1000
+sui client call --function mint --module widget --package  $PACKAGE_ID --gas-budget 1000
 ```
 
-Save the object item of the minted `widget` to an environmental variable:
+将生成的`widget`的对象项保存到环境变量中：
 
 ```bash
-    export ITEM_ID=<object ID of the widget item from console>
+export ITEM_ID=<object ID of the widget item from console>
 ```
 
-Then we list this item to our marketplace:
+然后我们将这个项目列出到我们的市场：
 
 ```bash
-    sui client call --function list --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID 1 --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 1000
+sui client call --function list --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID 1 --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 1000
 ```
 
-We need to submit two type arguments here, first is the type of the item to be listed and second is the fungible coin type for the payment. The above example uses a listing price of `1`. 
+我们需要在这里提交两个类型参数，第一个是要列出的项目的类型，第二个是用于支付的可替代硬币类型。 上面的例子使用了 `1` 的标价。
 
-After submitting this transaction, you can check the newly created listing on the [Sui explorer](https://explorer.sui.io/):
+提交本次交易后，您可以在[Sui explorer](https://explorer.sui.io/)查看新建的listing：
 
 ![Listing](../images/listing.png)
 
 ## Purchase
 
-Split out a `SUI` coin object of amount `1` to use as the payment object. You can use the `sui client gas` CLI command to see a list of available `SUI` coins under your account and pick one to be split.
+拆分出一个金额为“1”的“SUI”币对象作为支付对象。 您可以使用 `sui client gas` CLI 命令查看您帐户下可用的 `SUI` 代币列表，然后选择一个进行拆分。
 
 ```bash
     sui client split-coin --coin-id <object ID of the coin to be split> --amounts 1 --gas-budget 1000
 ```
 
-Export the object ID of the newly split `SUI` coin with balance `1`:
+导出余额为“1”的新拆分的`SUI`币的对象ID：
 
 ```bash
     export PAYMENT_ID=<object ID of the split 1 balance SUI coin>
 ```
 
-_Quiz: As an exercise, modify the marketplace contract to accept any payment that has enough balance to pay for the asking price, instead of requiring the exact amount._
+_测验：作为练习，修改市场合约以接受任何余额足以支付要价的付款，而不是要求确切的金额。_
 
-Now, let's buy back the item that we just listed:
+现在，让我们买回刚刚列出的商品：
 
 ```bash
     sui client call --function buy_and_take --module marketplace --package $PACKAGE_ID --args $MARKET_ID $ITEM_ID $PAYMENT_ID --type-args $PACKAGE_ID::widget::Widget 0x2::sui::SUI --gas-budget 1000
 ```
 
-You should see a long list of transaction effects in the console after submit this transaction. We can verify that the `widget` is owned by our address, and the `payments` `Table` now has an entry with the key of our address and should be of size `1`.
+提交此交易后，您应该会在控制台中看到一长串交易效果。 我们可以验证 `widget` 由我们的地址拥有，并且 `payments` `Table` 现在有一个带有我们地址键的条目，大小应该为 `1`。
 
 ### Take Profits
 
-Finally, we can claim our earnings by calling the `take_profits_and_keep` method:
+最后，我们可以通过调用`take_profits_and_keep`方法来领取我们的收益：
 
 ```bash
-    sui client call --function take_profits_and_keep --module marketplace --package $PACKAGE_ID --args $MARKET_ID --type-args 0x2::sui::SUI --gas-budget 1000
+sui client call --function take_profits_and_keep --module marketplace --package $PACKAGE_ID --args $MARKET_ID --type-args 0x2::sui::SUI --gas-budget 1000
 ```
 
-This will reap the balance from the `payments` `Table` object and return its size to `0`. Verify this on the explorer. 
+这将从 `payments` `Table` 对象中获取余额并将其大小返回到 `0`。 在资源管理器上验证这一点。
