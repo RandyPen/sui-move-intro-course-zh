@@ -6,11 +6,11 @@
 
 Move 中的`Vector`类似于其他语言（如 C++）中的 Vector。它是一种在运行时动态分配内存并管理一组单一类型的方法，可以是特定类型或[通用类型](../../unit-three/lessons/2_intro_to_generics.md)。
 
-需要注意的是，用泛型类型定义的向量可以接受_任意类型_的对象，集合中的所有对象仍然必须是_相同类型_，也就是说，集合是_同质的_。
+需要注意的是，用泛型类型定义的向量可以接受任意类型的对象，集合中的所有对象仍然必须是相同类型，也就是说，集合是同质的。
 
 ### 创建vector
 
-任何类型的向量都可以通过 `vector` 字面量创建。
+任何类型的向量都可以通过 `vector` 字面量和vector的API创建。
 
 ```
 vector<T>[]: vector<T>
@@ -20,6 +20,9 @@ vector<T>[e1, ..., en]: vector<T>
 一个简单的示例：
 
 ```
+const A: vector<u8> = vector[0u8, 1u8, 2u8];
+const B: vector<bool> = vector<bool>[false];
+
 (vector[]: vector<bool>);
 (vector[0u8, 1u8, 2u8]: vector<u8>);
 (vector<u128>[]: vector<u128>);
