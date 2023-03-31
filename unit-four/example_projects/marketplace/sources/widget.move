@@ -17,7 +17,7 @@ module marketplace::widget {
         let object = Widget {
             id: object::new(ctx)
         };
-        transfer::transfer(object, tx_context::sender(ctx));
+        transfer::public_transfer(object, tx_context::sender(ctx));
     }
 
 }
