@@ -55,18 +55,18 @@
     version = "0.0.1"
 
     [dependencies]
-    Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework", rev = "devnet" }
+    Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "main" }
 
     [addresses]
-    hello_world =  "0x0"
-    sui =  "0000000000000000000000000000000000000002"
+    hello_world = "0x0"
+    sui = "0x2"
     ```
 
 我们可以看到，在这里 Sui 标准库使用了一个 Github 仓库来声明，但其实也可以使用本地 binary 文件的相对路径或绝对路径来声明，比如:
 
     ```
     [dependencies]
-    Sui = { local = "../sui/crates/sui-framework" } 
+    Sui = { local = "../sui/crates/sui-framework/packages/sui-framework" } 
     ```
 
 ### Sui Module 和 Package 的命名
