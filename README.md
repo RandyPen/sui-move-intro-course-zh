@@ -7,8 +7,13 @@ Sui Move 编程的导论课
 - [Sui Developer Documentation](https://docs.sui.io/build)
 - [Sui GitHub](https://github.com/MystenLabs/sui)
 - [Sui Framework Documentaton](https://github.com/MystenLabs/sui/tree/main/crates/sui-framework/docs)
-- [Sui Typescript SDK](https://github.com/MystenLabs/sui/tree/main/sdk/typescript)
-- [Sui Rust SDK](https://github.com/MystenLabs/sui/tree/main/crates/sui-sdk)
+- [Sui Typescript SDK (官方)](https://github.com/MystenLabs/sui/tree/main/sdk/typescript)
+- [Sui Rust SDK (官方)](https://github.com/MystenLabs/sui/tree/main/crates/sui-sdk)
+- [Sui Golang SDK (社区)](https://github.com/coming-chat/go-sui-sdk)
+- [Sui Python SDK (社区)](https://github.com/FrankC01/pysui)
+- [Sui Java SDK (社区)](https://github.com/GrapeBaBa/sui4j)
+- [Sui Kotlin SDK (社区)](https://github.com/cosmostation/suikotlin)
+- [Sui C# SDK (社区)](https://github.com/d-moos/SuiNet)
 
 ## 社交媒体与社区
 
