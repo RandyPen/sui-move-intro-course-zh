@@ -8,6 +8,7 @@ Sui Move 编程的导论课
 - [Sui GitHub](https://github.com/MystenLabs/sui)
 - [Sui Framework Documentaton](https://github.com/MystenLabs/sui/tree/main/crates/sui-framework/docs)
 - [Sui Typescript SDK (官方)](https://github.com/MystenLabs/sui/tree/main/sdk/typescript)
+- [Sui Typescript SDK (社区)](https://github.com/scallop-io/sui-kit)
 - [Sui Rust SDK (官方)](https://github.com/MystenLabs/sui/tree/main/crates/sui-sdk)
 - [Sui Golang SDK (社区)](https://github.com/coming-chat/go-sui-sdk)
 - [Sui Python SDK (社区)](https://github.com/FrankC01/pysui)
