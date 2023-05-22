@@ -1,0 +1,4 @@
+/build
+Move.lock
+sui.log.*
+*.DS_store
