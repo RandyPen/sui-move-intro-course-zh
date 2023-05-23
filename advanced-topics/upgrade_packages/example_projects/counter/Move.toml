@@ -1,7 +1,7 @@
 [package]
 name = "counter"
 version = "0.0.1"
-published-at = "0x27044a91cbca7619c2227d1961a7ac220d4cc7bf326b507d8b1a13d26fb4d542"
+# published-at = "<ORIGINAL-PACKAGE-ID>"
 
 [dependencies]
 Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
