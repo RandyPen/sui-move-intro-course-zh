@@ -141,11 +141,16 @@
     }
 ```
 
-结合Clock模块的锁仓功能实现完毕。
+结合Clock模块的锁仓功能实现完毕，[完整的代码可以在这里找到](../example_projects/lockup/sources/lockup.move)。
 
 ## 发布和 CLI 测试
 
 在合约发布之后，需要先执行`start_timing`, 满足时长之后才能调用`withdraw_all`函数。测试时可以将时间数值改小一点，便于部署测试。
+
+在调用`start_timing`函数时，第三个参数输入`0x6`，表示共享的Clock模块。该Clock模块在创世区块中创建，开始计时，不可被更改。
+![调用计时](../images/start_timing.png)
+
+其他输入参数有`&Clock`的，也用同样方式调用。
 
 ### 编程练习
 
