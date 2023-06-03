@@ -15,6 +15,7 @@ Sui Move 编程的导论课
 - [Sui Java SDK (社区)](https://github.com/GrapeBaBa/sui4j)
 - [Sui Kotlin SDK (社区)](https://github.com/cosmostation/suikotlin)
 - [Sui C# SDK (社区)](https://github.com/d-moos/SuiNet)
+- [Sui Dart SDK (社区)](https://github.com/mofalabs/sui)
 - [Sui Explorer](https://explorer.sui.io/)
 
 ## 社交媒体与社区
