@@ -8,13 +8,13 @@
 
 - Module 开头是 `module` 关键词，后面跟着 module 名和花括号 {} ，module 的内容放置在花括号内。
 
-    ```
-    module hello_world {
+```Rust
+module hello_world {
 
-        // module 内容
+    // module 内容
 
-    }
-    ```
+}
+```
 
 - 已发布的 modules 在 Sui 里是 immutable objects; 意味着不能被更改、转移或删除。因为不可变的特性，该 object 不再由某个人拥有，因此可以被任何人使用。
 
@@ -49,25 +49,25 @@
 
 这是使用 Sui CLI 命令生成 `hello_world` package 时自动生成的配置文件 `Move.toml`:
 
-    ```
-    [package]
-    name = "hello_world"
-    version = "0.0.1"
+```bash
+[package]
+name = "hello_world"
+version = "0.0.1"
 
-    [dependencies]
-    Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "main" }
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "main" }
 
-    [addresses]
-    hello_world = "0x0"
-    sui = "0x2"
-    ```
+[addresses]
+hello_world = "0x0"
+sui = "0x2"
+```
 
 我们可以看到，在这里 Sui 标准库使用了一个 Github 仓库来声明，但其实也可以使用本地 binary 文件的相对路径或绝对路径来声明，比如:
 
-    ```
-    [dependencies]
-    Sui = { local = "../sui/crates/sui-framework/packages/sui-framework" } 
-    ```
+```
+[dependencies]
+Sui = { local = "../sui/crates/sui-framework/packages/sui-framework" } 
+```
 
 ### Sui Module 和 Package 的命名
 

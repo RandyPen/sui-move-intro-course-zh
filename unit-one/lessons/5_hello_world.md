@@ -10,7 +10,7 @@
 
 部署 package 的 Sui CLI 指令如下:
 
-```
+```bash
 sui client publish --path <absolute local path to the Sui Move package> --gas-budget 30000
 ```
 
@@ -22,7 +22,7 @@ sui client publish --path <absolute local path to the Sui Move package> --gas-bu
 
 让我们使用 export 指令将该 object ID 的值传递给一个变量。
 
-```
+```bash
 export PACKAGE_ID=<在先前输出信息中的 package object ID>
 ```
 
@@ -34,7 +34,7 @@ export PACKAGE_ID=<在先前输出信息中的 package object ID>
 
 完成该操作的 Sui CLI 指令是:
 
-```
+```bash
 sui client call --function mint --module hello_world --package $PACKAGE_ID --gas-budget 3000
 ```
 
