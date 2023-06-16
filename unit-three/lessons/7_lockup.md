@@ -66,6 +66,12 @@
 
 ## 添加时间约束
 
+### 链上获取时间
+
+Sui Network 上获取时间信息的方式有两种：
+1. clock模块，可以提供近乎实时的时间戳，只有数秒时间差。但需要用到共享的Clock object, 需要时间达成共识，如果原本交易没有使用共享object，会因此增加交易所需时间；
+2. epoch timestamps, 可以使用`sui::tx_context::epoch_timestamp_ms(ctx: &TxContext)`获取当前epoch起始时刻的时间戳，大约每24小时更新一次，时间没那么及时，但只用了`&TxContext`会比较方便。
+
 ### 初始化clock
 
 引入clock模块，并以毫秒为单位定义时间。定义常量与错误码。
@@ -143,7 +149,7 @@
 
 结合Clock模块的锁仓功能实现完毕，[完整的代码可以在这里找到](../example_projects/lockup/sources/lockup.move)。
 
-## 发布和 CLI 测试
+### 发布和 CLI 测试
 
 在合约发布之后，需要先执行`start_timing`, 满足时长之后才能调用`withdraw_all`函数。测试时可以将时间数值改小一点，便于部署测试。
 
@@ -157,5 +163,6 @@
 除了最基本的实现案例，您在学习过程中可以尝试添加如下功能进行练习：
 - 改为流支付形式的锁仓
 - 改`share object`为`object_wrapping`实现
+- 改为使用`epoch timestamps`获取时间信息
 - 分批次解锁，比如一年、两年、三年分批解锁
 
