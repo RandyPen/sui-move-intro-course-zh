@@ -16,7 +16,7 @@ Sui Move 编程的导论课
 - [Sui Kotlin SDK (社区)](https://github.com/cosmostation/suikotlin)
 - [Sui C# SDK (社区)](https://github.com/d-moos/SuiNet)
 - [Sui Dart SDK (社区)](https://github.com/mofalabs/sui)
-- [Sui Explorer](https://explorer.sui.io/)
+- [Sui Explorer](https://suiexplorer.com/)
 
 ## 社交媒体与社区
 
@@ -24,11 +24,13 @@ Sui Move 编程的导论课
 
 - 关注 [Sui Twitter](https://twitter.com/SuiNetwork) 获得 Sui 相关的更新和新闻
 - [Sui 官方 Discord](https://discord.gg/sui)
+- [Sui 开发者论坛](https://forums.sui.io/)
 
 ## 仓库语言
 
 - [x] [English](https://github.com/sui-foundation/sui-move-intro-course)
 - [x] 中文
+- [x] [Thai](https://github.com/Contribution-DAO/sui-move-intro-course-thai)
 
 如果你愿意帮助将该文档翻译到其他语言，请[联系我们](mailto:henry@mystenlabs.com)  
 
