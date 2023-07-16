@@ -2,3 +2,5 @@ build/
 *.DS_store
 sui.log.*
 Move.lock
+.idea
+book
