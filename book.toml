@@ -3,4 +3,4 @@ authors = ["uvd"]
 language = "en"
 multilingual = false
 src = "."
-title = "Sui Move Intro Course"
+title = "Sui Move导论"
