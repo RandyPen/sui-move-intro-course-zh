@@ -11,7 +11,7 @@
 部署 package 的 Sui CLI 指令如下:
 
 ```bash
-sui client publish --path <absolute local path to the Sui Move package> --gas-budget 30000
+sui client publish --path <absolute local path to the Sui Move package> --gas-budget 3000000000
 ```
 
 如果合约部署成功，输出信息会跟下面相似:
@@ -35,7 +35,7 @@ export PACKAGE_ID=<在先前输出信息中的 package object ID>
 完成该操作的 Sui CLI 指令是:
 
 ```bash
-sui client call --function mint --module hello_world --package $PACKAGE_ID --gas-budget 3000
+sui client call --function mint --module hello_world --package $PACKAGE_ID --gas-budget 300000000
 ```
 
 如果 `mint` 函数被成功调用，一个 Hello World object 会被创建和转移，console 中输出的信息会与下面相似:

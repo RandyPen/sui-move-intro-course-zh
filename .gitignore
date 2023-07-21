@@ -4,3 +4,4 @@ sui.log.*
 Move.lock
 .idea
 book
+.env
