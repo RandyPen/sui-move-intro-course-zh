@@ -1,4 +1,4 @@
-import { BCS, getSuiMoveConfig } from "@mysten/bcs";
+import { BCS, getSuiMoveConfig } from "npm:@mysten/bcs";
 
 // initialize the serializer with default Sui Move configurations
 const bcs = new BCS(getSuiMoveConfig());

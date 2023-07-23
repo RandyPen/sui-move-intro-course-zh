@@ -5,3 +5,5 @@ Move.lock
 .idea
 book
 .env
+.deno
+node_modules
