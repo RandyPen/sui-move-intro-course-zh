@@ -1,16 +1,16 @@
-# BCS Encoding
+# BCS 编码
 
-Binary Canonical Serialization, or BCS, is a serialization format developed in the context of the Diem blockchain, and is now extensively used in most of the blockchains based on Move (Sui, Starcoin, Aptos, 0L). BCS is not only used in the Move VM, but also used in transaction and event coding, such as serializing transactions before signing, or parsing event data. 
+Binary Canonical Serialization, [BCS](https://github.com/diem/bcs), 是在 Diem 区块链项目中开发出来的序列化格式，现在也被广泛应用于大部分基于 Move 的区块链，比如Sui, Starcoin, Aptos, 0L. 除了在 Move VM 虚拟机中使用，BCS也被用在交易 transaction 和事件 event 编码中，比如在签署交易之前做序列化处理，解析事件数据。
 
-Knowing how BCS works is crucial if you want to understand how Move works at a deeper level and become a Move expert. Let's dive in.
+如果你想深入了解Move的工作原理并成为Move专家，了解BCS的工作原理是至关重要的。让我们开启深入探讨。
 
-## BCS Specification and Properties
+## BCS 特性说明
 
-There are some high level properties of BCS encoding that are good to keep in mind as we go through the rest of the lesson:
+在我们继续学习的过程中，有一些关于BCS编码的高级属性是值得记住的:
 
-- BCS is a data-serialization format where the resulting output bytes do not contain any type information; because of this, the side receiving the encoded bytes will need to know how to deserialize the data
-- There are no structs in BCS (since there is no types); the struct simply defines the order in which fields are serialized
-- Wrapper types are ignored, so `OuterType` and `UnnestedType` will have the same BCS representation:
+- BCS是一种数据序列化格式，其生成的输出字节不包含任何类型信息。因此，接收编码字节的一方需要知道如何反序列化数据
+- BCS 中没有数据类型，当然也没有结构体 structs; struct 只是定义了内部字段 fields 被序列化的顺序
+- Wrapper 类型会被忽略掉，因此 `OuterType` 和 `UnnestedType` 会有同样的BCS表示:
 
     ```rust
     struct OuterType {
@@ -23,7 +23,7 @@ There are some high level properties of BCS encoding that are good to keep in mi
         address: address
     }
     ```
-- Types containing the generic type fields can be parsed up to the first generic type field. So it's a good practice to put the generic type field(s) last if it's a custom type that will be ser/de'd.
+- 包含泛型类型字段的类型可以被解析到第一个泛型类型字段。因此，如果泛型类型字段是自定义类型，并且需要进行序列化和反序列化操作，将泛型类型字段放在最后是一个好的实践方式。
     ```rust
     struct BCSObject<T> has drop, copy {
         id: ID,
@@ -32,11 +32,11 @@ There are some high level properties of BCS encoding that are good to keep in mi
         generic: T
     }
     ```
-    In this example, we can deserialize everything up to the `meta` field. 
-- Primitive types like unsigned ints are encoded in Little Endian format
-- Vector is serialized as a [ULEB128](https://en.wikipedia.org/wiki/LEB128) length (with max length up to `u32`) followed by the content of the vector.
+    在这个例子中，我们可以将所有数据反序列化直到`meta`字段。
+- 原始类型 primitive types（如无符号整数）以小端格式进行编码
+- 不定长向量 Vector 被序列化成一个表明包含向量 vector 长度的数字(最大取值是 `u32`), 后面跟着向量内的元素。[参考样例](https://github.com/diem/bcs#fixed-and-variable-length-sequences)都是采用[小端编码](https://en.wikipedia.org/wiki/LEB128)。
 
-The full BCS specification can be found in [the BCS repository](https://github.com/zefchain/bcs).
+完整的BCS特性说明可以在 [BCS repository](https://github.com/diem/bcs) 里找到。
 
 ## Using the `@mysten/bcs` JavaScript Library
 
@@ -210,7 +210,7 @@ Test result: OK. Total tests: 1; passed: 1; failed: 0
 Or we can publish the module (and export the PACKAGE_ID) and call the `emit_object` method using the above BCS serialized hexstring:
 
 ```bash
-sui client call --function emit_object --module bcs_object --package $PACKAGE_ID --args $OBJECT_HEXSTRING --gas-budget 1000
+sui client call --function emit_object --module bcs_object --package $PACKAGE_ID --args $OBJECT_HEXSTRING --gas-budget 100000000
 ```
 
 We can then check the `Events` tab of the transaction on the Sui Explorer to see that we emitted the correctly deserialized `BCSObject`:
