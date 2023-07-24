@@ -48,12 +48,12 @@ Binary Canonical Serialization, [BCS](https://github.com/diem/bcs), 是在 Diem 
 import { BCS, getSuiMoveConfig } from "npm:@mysten/bcs";
 ```
 
-### Basic Example
+### 基础用例
 
-Let's use the JavaScript library to serialize and de-serialize some simple data types first:
+使用bcs库对一些简单数据做序列化和反序列化操作:
 
-```javascript
-import { BCS, getSuiMoveConfig } from "@mysten/bcs";
+```typescript
+import { BCS, getSuiMoveConfig } from "npm:@mysten/bcs";
 
 // initialize the serializer with default Sui Move configurations
 const bcs = new BCS(getSuiMoveConfig());
@@ -75,11 +75,11 @@ const de_string = bcs.de(BCS.STRING, ser_string.toBytes());
 
 ```
 
-We can initialize the serializer instance with the built-in default setting for Sui Move using the above syntax, `new BCS(getSuiMoveConfig())`. 
+我们可以像上面的语法那样，用内置的默认设置`new BCS(getSuiMoveConfig())`来初始化Sui Move的序列化器实例。
 
-There are built-in ENUMs that can be used for Sui Move types like `BCS.U16`, `BCS.STRING`, etc. For [generic types](../../../unit-three/lessons/2_intro_to_generics.md), it can be defined using the same syntax as in Sui Move, like `vector<u8>` in the above example. 
+BCS中有内置的枚举类型，如`BCS.U16`, `BCS.STRING`等，可以直接被当作 Sui Move 类型使用。对于[泛型类型](../../../unit-three/lessons/2_intro_to_generics.md)，可以使用与Sui Move相同的语法进行定义，例如上面的示例中的`vector<u8>`。
 
-Let's take a close look at the serialized and deserialized fields:
+现在来仔细观察序列化和反序列化字段:
 
 ```bash
 # ints are little endian hexadecimals
@@ -94,12 +94,12 @@ Let's take a close look at the serialized and deserialized fields:
 test string
 ```
 
-### Type Registration
+### 类型注册
 
-We can register the custom types we will be working with using the following syntax:
+可以使用以下语法，来注册我们将要使用的自定义类型:
 
 ```javascript
-import { BCS, getSuiMoveConfig } from "@mysten/bcs";
+import { BCS, getSuiMoveConfig } from "npm:@mysten/bcs";
 const bcs = new BCS(getSuiMoveConfig());
 
 // Register the Metadata Type
@@ -116,13 +116,13 @@ bcs.registerStructType("BCSObject", {
 });
 ```
 
-## Using `bcs` in Sui Smart Contracts
+## 在 Sui 智能合约中使用 `bcs`
 
-Let's continue our example from above with the structs. 
+继续使用上面 structs 的例子来进行演示。
 
-### Struct Definition
+### 定义 Struct
 
-We start with the corresponding struct definitions in the Sui Move contract.
+我们首先在 Sui Move 合约中定义与之前对应的 struct.
 
 ```rust
 {
@@ -140,66 +140,65 @@ We start with the corresponding struct definitions in the Sui Move contract.
 }
 ```
 
-### Deserialization
+### 反序列化
 
-Now, let's write the function to deserialize an object in a Sui contract. 
+现在，在 Sui 合约中写一个函数将一个 object 反序列化操作。
 
 ```rust
-    public fun object_from_bytes(bcs_bytes: vector<u8>): BCSObject {
+public fun object_from_bytes(bcs_bytes: vector<u8>): BCSObject {
 
-        // Initializes the bcs bytes instance
-        let bcs = bcs::new(bcs_bytes);
+    // Initializes the bcs bytes instance
+    let bcs = bcs::new(bcs_bytes);
 
-        // Use `peel_*` functions to peel values from the serialized bytes. 
-        // Order has to be the same as we used in serialization!
-        let (id, owner, meta) = (
-        bcs::peel_address(&mut bcs), bcs::peel_address(&mut bcs), bcs::peel_vec_u8(&mut bcs)
-        );
-        // Pack a BCSObject struct with the results of serialization
-        BCSObject { id: object::id_from_address(id), owner, meta: Metadata {name: std::ascii::string(meta)}  } }
-
+    // Use `peel_*` functions to peel values from the serialized bytes. 
+    // Order has to be the same as we used in serialization!
+    let (id, owner, meta) = (
+    bcs::peel_address(&mut bcs), bcs::peel_address(&mut bcs), bcs::peel_vec_u8(&mut bcs)
+    );
+    // Pack a BCSObject struct with the results of serialization
+    BCSObject { id: object::id_from_address(id), owner, meta: Metadata {name: std::ascii::string(meta)}  } }
 ```
 
-The varies `peel_*` methods in Sui Frame [`bcs` module](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/bcs.md) are used to "peel" each individual field from the BCS serialized bytes. Note that the order we peel the fields must be exactly the same as the order of the fields in the struct definition. 
+在 Sui [`bcs` 模块](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/docs/bcs.md)中，各种`peel_*`方法用于从BCS序列化的字节中"peel"出每个单独的字段。请注意，我们"peel"字段的顺序必须与结构定义中字段的顺序完全相同。
 
-_Quiz: Why are the results not the same from the first two `peel_address` calls on the same `bcs` object?_
+_测验: 为什么在对同一个`bcs`对象调用的前两个`peel_address`的结果不相同?_
 
-Also note how we convert the types from `address` to `id`, and from `vector<8>` to `std::ascii::string` with helper functions.
+还要注意我们如何使用辅助函数将类型从`address`转换为`id`，以及从`vector<8>`转换为`std::ascii::string`.
 
-_Quiz: What would happen if `BSCObject` had a `UID` type instead of an `ID` type?_
+_测验: 如果`BSCObject`拥有的类型是`UID`而不是`ID`，会发生什么?_
 
-## Complete Ser/De Example
+## 补全 序列化/反序列化 示例
 
-Find the full JavaScript and Sui Move sample codes in the [`example_projects`](../example_projects/) folder.
+完整的 TypeScript 和 Sui Move 示例代码可以在[`example_projects`](../example_projects/)文件夹中找到。
 
-First, we serialize a test object using the JavaScript program:
+首先，我们使用TypeScript程序序列化一个测试object:
 
 ```javascript
 // We construct a test object to serialize, note that we can specify the format of the output to hex
 let _bytes = bcs
   .ser("BCSObject", {
-    id: "0x0000000000000000000000000000000000000005",
-    owner: "0x000000000000000000000000000000000000000a",
+    id: "0x0000000000000000000000000000000000000000000000000000000000000005",
+    owner: "0x000000000000000000000000000000000000000000000000000000000000000a",
     meta: {name: "aaa"}
   })
   .toString("hex");
 ```
 
-We want the BCS writer's output to be in hexadecimal format this time, which can be specified like above. 
+这次我们希望BCS writer的输出是十六进制格式，可以像上面那样指定。
 
-Affix the serialization result hexstring with `0x` prefix and export to an environmental variable:
+将序列化结果的十六进制字符串添加前缀 `0x`, 并导出到一个环境变量中:
 
 ```bash
-export OBJECT_HEXSTRING=0x0000000000000000000000000000000000000005000000000000000000000000000000000000000a03616161
+export OBJECT_HEXSTRING=0x0000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000000000000000000000a03616161
 ```
 
-Now we can either run the associated Move unit tests to check for correctness:
+现在我们可以运行相关的Move单元测试来检查正确性:
 
 ```bash 
 sui move test
 ```
 
-You should see this in the console:
+你应该会在控制台中看到这个:
 
 ```bash
 BUILDING bcs_move
@@ -207,14 +206,13 @@ Running Move unit tests
 [ PASS    ] 0x0::bcs_object::test_deserialization
 Test result: OK. Total tests: 1; passed: 1; failed: 0
 ```
-Or we can publish the module (and export the PACKAGE_ID) and call the `emit_object` method using the above BCS serialized hexstring:
+
+或者我们可以发布该模块(并导出PACKAGE_ID), 然后使用上述BCS序列化的十六进制字符串调用 `emit_object` 方法:
 
 ```bash
 sui client call --function emit_object --module bcs_object --package $PACKAGE_ID --args $OBJECT_HEXSTRING --gas-budget 100000000
 ```
 
-We can then check the `Events` tab of the transaction on the Sui Explorer to see that we emitted the correctly deserialized `BCSObject`:
+我们可以检查Sui Explorer上交易事务的 `Events` 选项卡，以查看emit输出的反序列化`BCSObject`是否正确:
 
 ![Event](../images/event.png)
-
-
