@@ -1,4 +1,4 @@
-import { BCS, getSuiMoveConfig } from "@mysten/bcs";
+import { BCS, getSuiMoveConfig } from "npm:@mysten/bcs";
 
 const bcs = new BCS(getSuiMoveConfig());
 
@@ -18,8 +18,8 @@ bcs.registerStructType("BCSObject", {
 // We construct a test object to serialize, note that we can specify the format of the output to hex
 let _bytes = bcs
   .ser("BCSObject", {
-    id: "0x0000000000000000000000000000000000000005",
-    owner: "0x000000000000000000000000000000000000000a",
+    id: "0x0000000000000000000000000000000000000000000000000000000000000005",
+    owner: "0x000000000000000000000000000000000000000000000000000000000000000a",
     meta: {name: "aaa"}
   })
   .toString("hex");

@@ -38,14 +38,14 @@ Binary Canonical Serialization, [BCS](https://github.com/diem/bcs), 是在 Diem 
 
 完整的BCS特性说明可以在 [BCS repository](https://github.com/diem/bcs) 里找到。
 
-## Using the `@mysten/bcs` JavaScript Library
+## 使用 `@mysten/bcs` NPM 库
 
-### Installation
+### 运行
 
-The library you will need to install for this part is the [@mysten/bcs library](https://www.npmjs.com/package/@mysten/bcs). You can install it by typing in the root directory of a node project:
+查看库文档[@mysten/bcs library](https://www.npmjs.com/package/@mysten/bcs). 运行环境是[deno](https://deno.land/), 无手动安装操作，直接导入即可。
 
-```bash
-npm i @mysten/bcs
+```Typescript
+import { BCS, getSuiMoveConfig } from "npm:@mysten/bcs";
 ```
 
 ### Basic Example
