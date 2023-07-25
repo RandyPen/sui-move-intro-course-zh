@@ -28,7 +28,7 @@
     - [交易市场合约](./unit-four/lessons/4_marketplace_contract.md)
     - [发布和测试](./unit-four/lessons/5_deployment_and_testing.md)
 - [高级主题](./advanced-topics/readme.md)
-    - [BCS编码](./advanced-topics/BCS_encoding/lessons/BCS_encoding.md)
+    - [BCS编码](./advanced-topics/BCS_encoding/lessons/BCS_编码.md)
     - [合约升级](./advanced-topics/upgrade_packages/readme.md)
       - [合约升级](./advanced-topics/upgrade_packages/lessons/1_合约升级.md)
       - [数据迁移](./advanced-topics/upgrade_packages/lessons/2_数据迁移.md)
