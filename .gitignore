@@ -7,3 +7,5 @@ book
 .env
 .deno
 node_modules
+tmp.*
+test.*
