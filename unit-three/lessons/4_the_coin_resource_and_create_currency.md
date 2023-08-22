@@ -4,7 +4,7 @@
 
 ## `Coin`资源
 
-现在我们了解了泛型是如何工作的，我们可以重新审视一下 "sui::coin "中的 "Coin "资源。它被[定义](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/coin.move#L29)为以下内容。
+现在我们了解了泛型是如何工作的，我们可以重新审视一下 "sui::coin "中的 "Coin "资源。它被[定义](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/coin.move#L26)为以下内容。
 
 ```rust
 struct Coin<phantom T> has key, store {
@@ -15,7 +15,7 @@ struct Coin<phantom T> has key, store {
 
 `Coin`资源类型是一个结构，有一个通用类型`T`和两个字段，`id`和`balance` 。`id`是`sui::object::UID`类型，我们之前已经看到过了。
 
-`balance`是`sui::balance::Balance`类型，并且[定义](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/balance.move#L25)为：
+`balance`是`sui::balance::Balance`类型，并且[定义](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/balance.move#L32)为：
 
 ```rust 
 struct Balance<phantom T> has store {
@@ -29,7 +29,7 @@ struct Balance<phantom T> has store {
 
 ## `create_currency` 方法
 
-让我们看看 `coin::create_currency` 在其[源代码](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/coin.move#L251)中实际做了什么：
+让我们看看 `coin::create_currency` 在其[源代码](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/coin.move#L235)中实际做了什么：
 
 ```rust
     public fun create_currency<T: drop>(
@@ -66,7 +66,7 @@ struct Balance<phantom T> has store {
     }
 ```
 
-该语句使用Sui框架中的[sui::types::is_one_time_witness](<https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/types.move>) 方法检查传入的`witness`资源是否是一次性见证。
+该语句使用Sui框架中的[sui::types::is_one_time_witness](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/types.move) 方法检查传入的`witness`资源是否是一次性见证。
 
 该方法创建并返回两个对象，一个是`TreasuryCap`资源，另一个是`CoinMetadata`资源。
 
@@ -97,12 +97,12 @@ struct Balance<phantom T> has store {
 
 ### `CoinMetadata`
 
-这是一个存储已创建的可替换代币的元数据的资源。它包括以下字段。
+这是一个存储已创建的同质化代币的元数据的资源。它包括以下字段。
 
--   `decimals`: 这个自定义可替换代币的精度
--   `name`：这个自定义可替换标记的名称
--   `symbol`：这个自定义可替换标记的标记符号
--   `description`: 这个自定义可替换标记的描述
--   `icon_url': 这个自定义可替换代币的图标文件的网址。
+-   `decimals`: 自定义同质化代币的精度
+-   `name`：自定义同质化代币的名称
+-   `symbol`：自定义同质化代币的代币符号
+-   `description`: 自定义同质化代币的描述
+-   `icon_url`: 自定义同质化代币的图标文件的网址
 
-`CoinMetadata`中包含的信息可以被认为是Sui的基本和轻量级的可替换代币标准，可以被钱包和浏览器用来显示使用`sui::coin`模块创建同质化代币。
+`CoinMetadata`中包含的信息可以被认为是Sui的基本和轻量级的同质化代币标准，可以被钱包和浏览器用来显示使用`sui::coin`模块创建同质化代币。
