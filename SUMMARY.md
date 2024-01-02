@@ -5,7 +5,7 @@
     - [sui项目结构](./unit-one/lessons/2_sui项目结构.md)
     - [定制类型与能力](./unit-one/lessons/3_定制类型与能力.md)
     - [函数](./unit-one/lessons/4_函数.md)
-    - [Hello World](./unit-one/lessons/5_hello_world.md)
+    - [部署智能合约与 Hello World Demo 项目](./unit-one/lessons/5_合约部署.md)
 - [第二章](./unit-two/readme.md)
     - [使用sui_objects](./unit-two/lessons/1_使用sui_objects.md)
     - [所有权](./unit-two/lessons/2_所有权.md)

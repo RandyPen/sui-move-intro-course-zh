@@ -55,11 +55,11 @@ name = "hello_world"
 version = "0.0.1"
 
 [dependencies]
-Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "main" }
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
+
 
 [addresses]
-hello_world = "0x0"
-sui = "0x2"
+hello_world =  "0x0"
 ```
 
 我们可以看到，在这里 Sui 标准库使用了一个 Github 仓库来声明，但其实也可以使用本地 binary 文件的相对路径或绝对路径来声明，比如:
@@ -71,10 +71,12 @@ Sui = { local = "../sui/crates/sui-framework/packages/sui-framework" }
 
 ### Sui Module 和 Package 的命名
 
-- Sui Move 的 module 和 package 命名跟随[Rust命名规范](https://rust-lang.github.io/api-guidelines/naming.html)
+- Sui Move 的 module 和 package 命名跟随 [Rust 命名规范](https://rust-lang.github.io/api-guidelines/naming.html)
 
 - Sui Move module 和 package 命名通常使用蛇形命名法 snake casing, i.e. this_is_snake_casing.
 
 - Sui module 名称会使用 Rust 路径分隔符 `::` 来分开 package 名和 module 名, 比如:
     1. `unit_one::hello_world` - `hello_world` module in `unit_one` package
     2. `capy::capy` - `capy` module in `capy` package
+
+- 有关 Move 命名约定的更多信息, 请查看 _Move Book_ 中的[风格部分](https://move-language.github.io/move/coding-conventions.html#naming)
