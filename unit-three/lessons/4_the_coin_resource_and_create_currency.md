@@ -1,8 +1,8 @@
-# `Coin`资源和`create_currency`方法
+# `Coin` 资源和 `create_currency` 方法
 
-现在，我们知道了泛型和见证模式是如何工作的，让我们再来看看`Coin`资源和`create_currency`方法。
+现在，我们知道了泛型和见证模式是如何工作的，让我们再来看看 `Coin` 资源和 `create_currency` 方法。
 
-## `Coin`资源
+## `Coin` 资源
 
 现在我们了解了泛型是如何工作的，我们可以重新审视一下 "sui::coin "中的 "Coin "资源。它被[定义](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/coin.move#L26)为以下内容。
 
@@ -99,10 +99,10 @@ struct Balance<phantom T> has store {
 
 这是一个存储已创建的同质化代币的元数据的资源。它包括以下字段。
 
--   `decimals`: 自定义同质化代币的精度
--   `name`：自定义同质化代币的名称
--   `symbol`：自定义同质化代币的代币符号
--   `description`: 自定义同质化代币的描述
--   `icon_url`: 自定义同质化代币的图标文件的网址
+- `decimals`: 自定义同质化代币的精度
+- `name`：自定义同质化代币的名称
+- `symbol`：自定义同质化代币的代币符号
+- `description`: 自定义同质化代币的描述
+- `icon_url`: 自定义同质化代币的图标文件的网址
 
 `CoinMetadata`中包含的信息可以被认为是Sui的基本和轻量级的同质化代币标准，可以被钱包和浏览器用来显示使用`sui::coin`模块创建同质化代币。

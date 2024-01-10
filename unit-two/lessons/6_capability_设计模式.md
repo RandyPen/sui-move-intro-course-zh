@@ -19,7 +19,7 @@
 
 接下来，我们要修改这个函数方法使其只能被拥有 `TeacherCap` capability object 的人调用。修改后的函数会将 capability 作为额外的参数传入，并且立即消耗它。
 
-比如说，对这个 `create_wrappable_transcript_object` 函数方法，我们可以做出下面的修改: 
+比如说，对这个 `create_wrappable_transcript_object` 函数方法，我们可以做出下面的修改:
 
 ```rust
     public entry fun create_wrappable_transcript_object(_: &TeacherCap, history: u8, math: u8, literature: u8, ctx: &mut TxContext) {

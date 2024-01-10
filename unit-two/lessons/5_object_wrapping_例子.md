@@ -19,7 +19,7 @@ struct WrappableTranscript has key, store {
 }
 ```
 
-2. 我们需要为 `Folder` struct 增加一个额外的属性 `intended_address` 用来声明内部被封装起来的成绩记录单的目标观察者的地址。 
+2. 我们需要为 `Folder` struct 增加一个额外的属性 `intended_address` 用来声明内部被封装起来的成绩记录单的目标观察者的地址。
 
 ``` rust
 struct Folder has key {
@@ -72,7 +72,7 @@ public entry fun unpack_wrapped_transcript(folder: Folder, ctx: &mut TxContext){
 
 这个 `assert!` 宏会以下面的格式输入两个参数:
 
-```
+```rust
 assert!(<bool expression>, <code>)
 ```
 
@@ -89,4 +89,3 @@ assert!(<bool expression>, <code>)
 这个错误码会在应用层上被消耗掉并进行合适的处理。
 
 **这里能找到对应这里的第二版处于开发进展中版本的代码: [WIP transcript.move](../example_projects/transcript/sources/transcript_2.move_wip)**
-

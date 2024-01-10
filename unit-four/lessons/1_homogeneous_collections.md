@@ -1,10 +1,10 @@
-# Homogeneous Collections 
+# Homogeneous Collections
 
 在深入探讨在 Sui 上构建市场这一主题之前，让我们先了解一下 Move 中的集合。
 
 ## Vectors
 
-Move 中的`Vector`类似于其他语言（如 C++）中的 Vector。它是一种在运行时动态分配内存并管理一组单一类型的方法，可以是特定类型或[通用类型](../../unit-three/lessons/2_intro_to_generics.md)。
+Move 中的 `Vector` 类似于其他语言（如 C++）中的 Vector。它是一种在运行时动态分配内存并管理一组单一类型的方法，可以是特定类型或[通用类型](../../unit-three/lessons/2_intro_to_generics.md)。
 
 需要注意的是，用泛型类型定义的向量可以接受任意类型的对象，集合中的所有对象仍然必须是相同类型，也就是说，集合是同质的。
 
@@ -12,14 +12,14 @@ Move 中的`Vector`类似于其他语言（如 C++）中的 Vector。它是一�
 
 任何类型的向量都可以通过 `vector` 字面量和vector的API创建。
 
-```
+```rust
 vector<T>[]: vector<T>
 vector<T>[e1, ..., en]: vector<T>
 ```
 
 一个简单的示例：
 
-```
+```rust
 const A: vector<u8> = vector[0u8, 1u8, 2u8];
 const B: vector<bool> = vector<bool>[false];
 
@@ -29,7 +29,7 @@ const B: vector<bool> = vector<bool>[false];
 (vector<address>[@0x42, @0x100]: vector<address>);
 ```
 
-下面是一个自定义类型的vector，并封装了相关操作函数，请参阅包含的示例代码以`vector`的定义以及其基本操作。
+下面是一个自定义类型的vector，并封装了相关操作函数，请参阅包含的示例代码以 `vector` 的定义以及其基本操作。
 
 ```rust
 module collection::vector {
@@ -78,13 +78,13 @@ module collection::vector {
 
 ## Table
 
-`Table`是一个映射类的集合，可以动态存储键值对。但与传统的映射集合不同，它的键和值不存储在`Table`值中，而是使用 Sui 的对象系统存储。该`Table`结构仅充当对象系统的句柄以检索这些键和值。
+`Table` 是一个映射类的集合，可以动态存储键值对。但与传统的映射集合不同，它的键和值不存储在 `Table` 值中，而是使用 Sui 的对象系统存储。该 `Table` 结构仅充当对象系统的句柄以检索这些键和值。
 
-`Table`中一个`key`的类型必须具有`copy + drop + store`的能力约束，并且`value`类型必须具有`store`的能力约束。
+`Table` 中一个 `key` 的类型必须具有 `copy + drop + store` 的能力约束，并且 `value` 类型必须具有 `store` 的能力约束。
 
-`Table`也是一种*同构集合*类型，其中键和值字段可以指定或泛型类型，但集合中的所有值和所有键`Table`必须是相同的*类型*。
+`Table` 也是一种*同构集合*类型，其中键和值字段可以指定或泛型类型，但集合中的所有值和所有键 `Table` 必须是相同的*类型*。
 
-*测验：用运算符检查包含完全相同的键值对的两个表对象是否彼此相等`===`？试试看。*
+*测验：用运算符检查包含完全相同的键值对的两个表对象是否彼此相等 `===`？试试看。*
 
 有关使用集合的信息，请参见以下示例`Table`：
 
