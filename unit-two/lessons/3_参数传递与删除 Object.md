@@ -30,7 +30,7 @@ public entry fun delete_transcript(transcriptObject: TranscriptObject){
 上面 `delete_transcript` 方法的例子展现了如何在 Sui 上删除一个 object.
 
 1. 要删除一个 object, 你首先要解包这个 object 并且获取它的 object ID. 解包的操作只能够在定义了这个 object 的 module 内进行。这是为了遵守 Move 的专用结构操作规则:
-   
+
 - struct 类型只能在定义了该 struct 的 module 内创建("打包") 或 销毁("解包")
 - struct 的属性也只能在定义了该 struct 的 module 内获取
 
@@ -41,6 +41,3 @@ public entry fun delete_transcript(transcriptObject: TranscriptObject){
 *💡注意: 在上面示例中使用了下划线 `_` 来标注未使用的变量或参数，可以在传入后立即消耗掉它们。*  
 
 **这里能找到对应这里的处于开发进展中版本的代码: [WIP transcript.move](../example_projects/transcript/sources/transcript_1.move_wip)**
-
-
-

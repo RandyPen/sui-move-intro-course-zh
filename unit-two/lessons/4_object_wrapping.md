@@ -25,4 +25,4 @@ struct Folder has key {
 
 当一个 object 被封装后，封装起来的 object 就不再能单独根据 object ID 来获取。它会变成 封装 object 的一部分。更重要的是，被封装的 object 不能被作为参数进行传递，而只能通过 封装 object 进行获取。
 
-由于这个特性，object wrapping 可以被用作为限制一个 object 在特定的合约调用之外不能被获取的方法。对更多关于 Object wrapping 的信息，可以看[这里](https://docs.sui.io/devnet/build/programming-with-objects/ch4-object-wrapping). 
+由于这个特性，object wrapping 可以被用作为限制一个 object 在特定的合约调用之外不能被获取的方法。对更多关于 Object wrapping 的信息，可以看[这里](https://docs.sui.io/devnet/build/programming-with-objects/ch4-object-wrapping)。

@@ -58,7 +58,7 @@ module fungible_tokens::managed_tests {
     };
 ```
 
-### Minting 
+### Minting
 
 在铸造 `Coin<MANAGED>` 对象场景中，我们使用 [next_tx](<https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/sources/test/test_scenario.move>) 方法前进到下一个交易。
 
@@ -77,7 +77,7 @@ next_tx(&mut scenario, addr1);
 };
 ```
 
-### Burning 
+### Burning
 
 测试燃烧代币基本跟测试铸造代币完全一样，除了我们也需要在代币持有者那检索 `Coin<MANAGED>`对象。
 
@@ -94,4 +94,3 @@ sui move test
 你就可以看到控制台的输出结果显示哪个单元测试通过了，哪个没通过。
 
 ![Unit Test](../images/unittest.png)
-

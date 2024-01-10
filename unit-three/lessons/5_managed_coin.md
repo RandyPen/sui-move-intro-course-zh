@@ -1,16 +1,16 @@
 # Managed Coin 案例
 
-我们已经深入了解了`sui::coin` 模块，现在我们可以来看一个简单但是完整的案例，即创造一种由可信任管理员 mint 和 burn 的自定义的同质化代币，与许多 ERC-20 代币实现相似。
+我们已经深入了解了 `sui::coin` 模块，现在我们可以来看一个简单但是完整的案例，即创造一种由可信任管理员 mint 和 burn 的自定义的同质化代币，与许多 ERC-20 代币实现相似。
 
 ## 智能合约
 
-你可以在项目案例文件夹中找到完整的 [Managed Coin 案例合约](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-three/example_projects/fungible_tokens/sources/managed.move)。
+你可以在项目案例文件夹中找到完整的 [Managed Coin 案例合约](../example_projects/fungible_tokens/sources/managed.move)。
 
-根据我们目前课程所涵盖的内容，这份合约应该很容易理解。它完全遵守 [One Time Witness](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-three/lessons/3_witness_design_pattern.md#one-time-witness) 模式，`witness` 资源就叫 `MANAGED`，由 `init` 功能模块自动创建。
+根据我们目前课程所涵盖的内容，这份合约应该很容易理解。它完全遵守 [One Time Witness](3_witness_design_pattern.md#one-time-witness) 模式，`witness` 资源就叫 `MANAGED`，由 `init` 功能模块自动创建。
 
 然后，`init` 功能通过调用 `coin::create_currency` 获取 `TreasuryCap` 和 `CoinMetadata` 资源，得到的参数就是 `CoinMetadata` 对象的字段，包括代币名称、符号、图标地址等。
 
-通过 `transfer::freeze_object` 方法创建后，`CoinMetadata` 立刻就冻结了，之后就变成可以被任何地址读取的[不可变共享对象](https://github.com/RandyPen/sui-move-intro-course-zh/blob/main/unit-two/lessons/2_所有权.md)。
+通过 `transfer::freeze_object` 方法创建后，`CoinMetadata` 立刻就冻结了，之后就变成可以被任何地址读取的[不可变共享对象](../../unit-two/lessons/2_所有权.md)。
 
 `TreasuryCap` [Capability object](https://github.com/RandyPen/sui-move-intro-course-zh/blob/main/unit-two/lessons/6_capability_设计模式.md) 被用作控制调用 `mint` 和 `burn` 方法的一种方式，`mint` 和 `burn` 分别可以铸造和燃烧 `Coin<MANAGED>` object。
 

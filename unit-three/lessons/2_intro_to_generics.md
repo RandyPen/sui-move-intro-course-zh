@@ -1,6 +1,6 @@
 # Generics 范型
 
-Generics在计算机术语中被称为范型，引用 [Rust Book](https://doc.rust-lang.org/stable/book/ch10-00-generics.html) 对于泛型得定义：*泛型是具体类型或其他属性的抽象替代品*。范型使得在编写 Sui Move 代码时提供更强的灵活性，并避免逻辑重复。
+Generics 在计算机术语中被称为范型，引用 [Rust Book](https://doc.rust-lang.org/stable/book/ch10-00-generics.html) 对于泛型的定义：*泛型是具体类型或其他属性的抽象替代品*。范型使得在编写 Sui Move 代码时提供更强的灵活性，并避免逻辑重复。
 
 实际上，泛型允许我们只编写单个函数，写一套逻辑，而应用于任何类型上。所以这种函数也被称为模板 ——个可以应用于任何类型的模板处理程序。
 
@@ -51,7 +51,7 @@ module Storage {
 
 我们将在下一节中看到，在某些情况下，可以使用一种称为`phantom` 的特殊关键字来绕过此规则。
 
-*💡有关泛型类型的一些示例，请参阅 `example_projects`下的* [泛型项目](https://github.com/sui-foundation/sui-move-intro-course/blob/main/unit-three/example_projects/generics)*。*
+*💡有关泛型类型的一些示例，请参阅 `example_projects`下的* [泛型项目](../example_projects/generics)*。*
 
 ### 在函数中使用Generics
 
@@ -71,7 +71,7 @@ public fun create_box(value: u64): Box<u64> {
     }
 ```
 
-这只接受 u64 类型的输入，为了使用 `create_box` 的方法，同时仍然使用同样的泛型 Box 结构。
+这将只接受 u64 类型的输入，为了使用 `create_box` 的方法，同时仍然使用同样的泛型 Box 结构。
 
 #### 使用Generics调用函数
 
@@ -96,6 +96,6 @@ sui client call --package $PACKAGE --module $MODULE --function "create_box" --ar
 
 ## 高级 Generics 语法
 
-有关 Sui Move 中涉及使用的更多的泛型高级语法，例如多个泛型类型，请参阅 [Move Book 中关于 Generic 的部分。](https://move-book.com/advanced-topics/understanding-generics.html)
+有关 Sui Move 中涉及使用的更多的泛型高级语法，例如多个泛型类型，请参阅 [Move Book 中关于 Generic 的部分](https://move-book.com/advanced-topics/understanding-generics.html)。
 
 但是对于我们当前关于同质化代币的课程，您已经足够了解泛型是如何运行的。
