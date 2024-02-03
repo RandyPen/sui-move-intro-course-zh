@@ -36,8 +36,9 @@ Sui Move 编程的导论课
 
 ## 在线课程
 
-- [ ] Encode Club Video Series (English)
-- [ ] [BuidlerDAO SUI MOVE中文系列课程](https://www.bilibili.com/video/BV1RY411v7YU) (中文)
+- [x] Encode Club Video Series (English) [YouTube playlist](https://www.youtube.com/playlist?list=PLfEHHr3qexv_aE7p6oDyVtD3WQsDsJngr) | [tutorial and code](https://github.com/sui-foundation/encode-sui-educate)
+- [x] [BuidlerDAO SUI MOVE中文系列课程](https://www.bilibili.com/video/BV1RY411v7YU) (中文)
+- [x] MoveBit Move on Sui Course (English) [YouTube playlist](https://www.youtube.com/playlist?list=PL3id4Z64z2sNED_aH7UYIFFwy6MsvKCN9) | [tutorial and code](https://github.com/movebit/sui-course-2023)
 
 # FAQ
 
