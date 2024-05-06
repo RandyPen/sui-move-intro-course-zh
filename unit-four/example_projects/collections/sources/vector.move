@@ -5,16 +5,16 @@ module collection::vector {
 
     use std::vector;
 
-    struct Widget {
+    public struct Widget {
     }
 
     // Vector for a specified  type
-    struct WidgetVector {
+    public struct WidgetVector {
         widgets: vector<Widget>
     }
 
     // Vector for a generic type 
-    struct GenericVector<T> {
+    public struct GenericVector<T> {
         values: vector<T>
     }
 

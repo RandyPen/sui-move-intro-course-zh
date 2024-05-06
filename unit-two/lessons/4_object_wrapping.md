@@ -5,13 +5,13 @@
 继续看我们成绩记录单的例子。我们定义一个新的 `WrappableTranscript` 类型，以及关联的封装类型 `Folder`. 
 
 ```rust
-struct WrappableTranscript has store {
+public struct WrappableTranscript has store {
     history: u8,
     math: u8,
     literature: u8,
 }
 
-struct Folder has key {
+public struct Folder has key {
     id: UID,
     transcript: WrappableTranscript,
 }

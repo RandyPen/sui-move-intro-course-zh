@@ -22,7 +22,7 @@ witness是一种设计模式，用于证明有关的一个资源或类型 `A`，
 
         /// Phantom parameter T can only be initialized in the `create_guardian`
         /// function. But the types passed here must have `drop`.
-        struct Guardian<phantom T: drop> has key, store {
+    public struct Guardian<phantom T: drop> has key, store {
             id: UID
         }
 

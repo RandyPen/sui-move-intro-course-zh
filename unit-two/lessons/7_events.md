@@ -14,7 +14,7 @@ Sui 上面的 events 也是以 objects 的形式表示。在 Sui 中有几种系
 
 ```rust
     /// Event marking when a transcript has been requested
-    struct TranscriptRequestEvent has copy, drop {
+    public struct TranscriptRequestEvent has copy, drop {
         // The Object ID of the transcript wrapper
         wrapper_id: ID,
         // The requester of the transcript

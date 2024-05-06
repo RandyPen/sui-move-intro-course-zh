@@ -27,7 +27,7 @@ public fun timestamp_ms(clock: &clock::Clock): u64
 ```rust
     /// 可转移对象，用于存储归属的硬币
     ///
-    struct Locker has key, store {
+public struct Locker has key, store {
         id: UID,
         start_date: u64,
         final_date: u64,

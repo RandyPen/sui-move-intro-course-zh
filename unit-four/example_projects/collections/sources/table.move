@@ -7,12 +7,12 @@ module collection::table {
     use sui::tx_context::{TxContext};
 
     // Defining a table with specified types for the key and value
-    struct IntegerTable {
+    public struct IntegerTable {
         table_values: Table<u8, u8>
     }
 
     // Defining a table with generic types for the key and value 
-    struct GenericTable<phantom K: copy + drop + store, phantom V: store> {
+    public struct GenericTable<phantom K: copy + drop + store, phantom V: store> {
         table_values: Table<K, V>
     }
 

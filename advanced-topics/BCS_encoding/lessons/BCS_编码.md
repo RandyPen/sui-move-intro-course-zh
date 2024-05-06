@@ -13,19 +13,19 @@ Binary Canonical Serialization, [BCS](https://github.com/diem/bcs), 是在 Diem 
 - Wrapper 类型会被忽略掉，因此 `OuterType` 和 `UnnestedType` 会有同样的BCS表示:
 
     ```rust
-    struct OuterType {
+    public struct OuterType {
         owner: InnerType
     }
-    struct InnerType {
+    public struct InnerType {
         address: address
     }
-    struct UnnestedType {
+    public struct UnnestedType {
         address: address
     }
     ```
 - 包含泛型类型字段的类型可以被解析到第一个泛型类型字段。因此，如果泛型类型字段是自定义类型，并且需要进行序列化和反序列化操作，将泛型类型字段放在最后是一个好的实践方式。
     ```rust
-    struct BCSObject<T> has drop, copy {
+    public struct BCSObject<T> has drop, copy {
         id: ID,
         owner: address,
         meta: Metadata,

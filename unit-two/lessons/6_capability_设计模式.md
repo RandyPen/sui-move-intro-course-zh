@@ -6,7 +6,7 @@
 
 ```rust
     // Type that marks the capability to create, update, and delete transcripts
-    struct TeacherCap has key {
+    public struct TeacherCap has key {
         id: UID
     }
 ```

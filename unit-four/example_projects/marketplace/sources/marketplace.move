@@ -20,7 +20,7 @@ module marketplace::marketplace {
     /// A shared `Marketplace`. Can be created by anyone using the
     /// `create` function. One instance of `Marketplace` accepts
     /// only one type of Coin - `COIN` for all its listings.
-    struct Marketplace<phantom COIN> has key {
+    public struct Marketplace<phantom COIN> has key {
         id: UID,
         items: Bag,
         payments: Table<address, Coin<COIN>>
@@ -28,7 +28,7 @@ module marketplace::marketplace {
 
     /// A single listing which contains the listed item and its
     /// price in [`Coin<COIN>`].
-    struct Listing has key, store {
+    public struct Listing has key, store {
         id: UID,
         ask: u64,
         owner: address,
@@ -54,7 +54,7 @@ module marketplace::marketplace {
         ctx: &mut TxContext
     ) {
         let item_id = object::id(&item);
-        let listing = Listing {
+        let mut listing = Listing {
             ask,
             id: object::new(ctx),
             owner: tx_context::sender(ctx),
@@ -71,7 +71,7 @@ module marketplace::marketplace {
         ctx: &mut TxContext
     ): T {
         let Listing {
-            id,
+            mut id,
             owner,
             ask: _,
         } = bag::remove(&mut marketplace.items, item_id);
@@ -102,7 +102,7 @@ module marketplace::marketplace {
         paid: Coin<COIN>,
     ): T {
         let Listing {
-            id,
+            mut id,
             ask,
             owner
         } = bag::remove(&mut marketplace.items, item_id);

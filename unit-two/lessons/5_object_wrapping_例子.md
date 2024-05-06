@@ -11,7 +11,7 @@
 回想一下，在 Sui Move 中具备了 `key` 和 `store` 能力的定制类型可以认为是资产。
 
 ```rust
-struct WrappableTranscript has key, store {
+public struct WrappableTranscript has key, store {
         id: UID,
         history: u8,
         math: u8,
@@ -22,7 +22,7 @@ struct WrappableTranscript has key, store {
 2. 我们需要为 `Folder` struct 增加一个额外的属性 `intended_address` 用来声明内部被封装起来的成绩记录单的目标观察者的地址。
 
 ``` rust
-struct Folder has key {
+public struct Folder has key {
     id: UID,
     transcript: WrappableTranscript,
     intended_address: address

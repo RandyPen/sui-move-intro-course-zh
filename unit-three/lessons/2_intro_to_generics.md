@@ -16,7 +16,7 @@ Generics 在计算机术语中被称为范型，引用 [Rust Book](https://doc.r
 
 ```rust
 module Storage {
-    struct Box {
+    public struct Box {
         value: u64
     }
 }
@@ -26,7 +26,7 @@ module Storage {
 
 ```rust
 module Storage {
-    struct Box<T> {
+    public struct Box<T> {
         value: T
     }
 }
@@ -39,7 +39,7 @@ module Storage {
 ```rust
 module Storage {
     // T must be copyable and droppable 
-    struct Box<T: store + drop> has key, store {
+    public struct Box<T: store + drop> has key, store {
         value: T
     }
 }
