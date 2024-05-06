@@ -7,7 +7,7 @@ Sui Move 是一门完全以 object 为中心的编程语言。在Sui上交易的
 看一个记录学生成绩报告单的例子:
 
 ```rust
-struct Transcript {
+public struct Transcript {
     history: u8,
     math: u8,
     literature: u8,
@@ -19,7 +19,7 @@ struct Transcript {
 ```rust
 use sui::object::{UID};
 
-struct TranscriptObject has key {
+public struct TranscriptObject has key {
     id: UID,
     history: u8,
     math: u8,

@@ -7,7 +7,7 @@
 现在我们了解了泛型是如何工作的，我们可以重新审视一下 "sui::coin "中的 "Coin "资源。它被[定义](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/coin.move#L26)为以下内容。
 
 ```rust
-struct Coin<phantom T> has key, store {
+public struct Coin<phantom T> has key, store {
         id: UID,
         balance: Balance<T>
     }
@@ -18,7 +18,7 @@ struct Coin<phantom T> has key, store {
 `balance`是`sui::balance::Balance`类型，并且[定义](https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/balance.move#L32)为：
 
 ```rust 
-struct Balance<phantom T> has store {
+public struct Balance<phantom T> has store {
     value: u64
 }
 ```
@@ -77,7 +77,7 @@ struct Balance<phantom T> has store {
 ```rust
     /// Capability allowing the bearer to mint and burn
     /// coins of type `T`. Transferable
-    struct TreasuryCap<phantom T> has key, store {
+public struct TreasuryCap<phantom T> has key, store {
             id: UID,
             total_supply: Supply<T>
         }

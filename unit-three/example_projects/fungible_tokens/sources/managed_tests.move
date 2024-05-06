@@ -15,7 +15,7 @@ module fungible_tokens::managed_tests {
         let addr1 = @0xA;
 
         // Begins a multi transaction scenario with addr1 as the sender
-        let scenario = test_scenario::begin(addr1);
+        let mut scenario = test_scenario::begin(addr1);
         
         // Run the managed coin module init function
         {
@@ -25,7 +25,7 @@ module fungible_tokens::managed_tests {
         // Mint a `Coin<MANAGED>` object
         next_tx(&mut scenario, addr1);
         {
-            let treasurycap = test_scenario::take_from_sender<TreasuryCap<MANAGED>>(&scenario);
+            let mut treasurycap = test_scenario::take_from_sender<TreasuryCap<MANAGED>>(&scenario);
             managed::mint(&mut treasurycap, 100, addr1, test_scenario::ctx(&mut scenario));
             test_scenario::return_to_address<TreasuryCap<MANAGED>>(addr1, treasurycap);
         };
@@ -36,7 +36,7 @@ module fungible_tokens::managed_tests {
             let coin = test_scenario::take_from_sender<Coin<MANAGED>>(&scenario);
             debug::print(&coin);
             assert!(coin::value(&coin) == 100, 0);
-            let treasurycap = test_scenario::take_from_sender<TreasuryCap<MANAGED>>(&scenario);
+            let mut treasurycap = test_scenario::take_from_sender<TreasuryCap<MANAGED>>(&scenario);
             managed::burn(&mut treasurycap, coin);
             test_scenario::return_to_address<TreasuryCap<MANAGED>>(addr1, treasurycap);
         };

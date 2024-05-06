@@ -9,7 +9,7 @@ module marketplace::widget {
     use sui::transfer;
     use sui::tx_context::{Self, TxContext};
 
-    struct Widget has key, store {
+    public struct Widget has key, store {
         id: UID,
     }
 
